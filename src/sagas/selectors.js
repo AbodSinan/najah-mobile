@@ -1,0 +1,1 @@
+export const getUserType = (state) => state.user.userType;
