@@ -7,6 +7,7 @@ const defaultState = Object.freeze({
     token: null,
     userType: null,
     errors: [],
+    status: {}
 })
 
 export default function userReducer(state=defaultState, action) {

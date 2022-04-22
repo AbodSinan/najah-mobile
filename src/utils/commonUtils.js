@@ -32,3 +32,7 @@ export const toSnakeKeys = (obj) => {
 export const toCamelCaseKeys = (obj) => {
     return transformKeys({ obj, format: "camelCase" });
 };
+
+export const removeError = (errors, endpointName) => ( 
+    chain(errors).filter((error) => error.endpointName !== endpointName).value()
+);

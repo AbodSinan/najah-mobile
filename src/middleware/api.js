@@ -1,4 +1,4 @@
-import * as actions from '../services/api/actions';
+import * as actions from '../actions/api';
 import api from "../services/api/Api";
 
 const makeApiCall = async (store, action) => {

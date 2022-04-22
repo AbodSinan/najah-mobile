@@ -1,4 +1,4 @@
-import * as actions from './actions';
+import * as actions from '../../actions/api';
 import { toCamelCaseKeys, toSnakeKeys} from '../../utils/commonUtils';
 
 class Endpoint{

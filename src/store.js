@@ -5,6 +5,7 @@ import rootSaga from "./sagas/rootsaga";
 import { apiMiddleware } from './middleware/api';
 import storage from "redux-persist/lib/storage";
 import reducer from "./reducers/index";
+import { wrapReducer } from "./middleware/wrapReducer";
 
 
 export default function store () {
@@ -16,9 +17,10 @@ export default function store () {
     };
 
     const persistedReducer = persistReducer(persistConfig, reducer);
+    const apiReducer = wrapReducer(persistedReducer)
 
     const store = configureStore({
-        reducer: persistedReducer,
+        reducer: apiReducer,
         middleware: (getDefaultMiddleware) => [
             ...getDefaultMiddleware(),
             sagaMiddleware,
