@@ -18,8 +18,6 @@ class Endpoint {
     this.api = null;
     this.prepareRequest = prepareRequest;
     this.prepareResponse = prepareResponse;
-    console.log("endpoint", this.endpoint);
-    console.log("prep req", this.prepareResponse);
     this.prepareRequestParams = prepareRequestParams;
     this.createAction = this.createAction.bind(this);
     this.reducer = reducer;

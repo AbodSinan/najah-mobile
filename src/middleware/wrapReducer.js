@@ -29,12 +29,13 @@ const handleTransform = ({ action, state, endpoint }) => {
     }
 
     case actions.API_CALL_SUCCESS: {
-      const transformedResponse = endpoint.prepareResponse({
-        data: action,
-        endpointName,
-        requestParams,
-      });
-      console.log(transformedResponse);
+      const transformedResponse = toSnakeCase(
+        endpoint.prepareResponse({
+          data: action,
+          endpointName,
+          requestParams,
+        })
+      );
 
       return {
         ...state,
