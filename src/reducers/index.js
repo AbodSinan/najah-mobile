@@ -1,8 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import apiReducer from "./api";
 import userReducer from "./user";
 
 const rootReducer = combineReducers({
-    user: userReducer,
-})
+  api: apiReducer,
+  user: userReducer,
+});
 
 export default rootReducer;

@@ -1,7 +1,16 @@
 import { toSnakeKeys } from "../../utils/commonUtils";
 
-export const prepareRegisterRequest = (params) => toSnakeKeys({
+export const defaultPrepareRequest = (params) => {
+  return toSnakeKeys({
     body: {
-        ...params,
-    }
-})
+      ...params,
+    },
+  });
+};
+
+export const prepareRegisterRequest = (params) =>
+  toSnakeKeys({
+    body: {
+      ...params,
+    },
+  });
