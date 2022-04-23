@@ -1,5 +1,6 @@
 import { isEqual } from "lodash";
 import { removeError } from "../utils/commonUtils";
+import { v4 as uuid } from "uuid";
 
 import apiStatusEnum from "../enums/apiStatusEnum";
 
@@ -48,7 +49,7 @@ const handleTransform = ({ action, state, endpoint }) => {
     case actions.API_CALL_ERROR: {
       const errors = [
         {
-          uuid: uuid4(),
+          uuid: uuid(),
           endpointName,
           error,
         },
