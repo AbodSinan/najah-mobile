@@ -1,5 +1,5 @@
 import { isEqual } from "lodash";
-import { removeError } from "../utils/commonUtils";
+import { removeError, toCamelCaseKeys } from "../utils/commonUtils";
 import { v4 as uuid } from "uuid";
 
 import apiStatusEnum from "../enums/apiStatusEnum";
@@ -29,7 +29,7 @@ const handleTransform = ({ action, state, endpoint }) => {
     }
 
     case actions.API_CALL_SUCCESS: {
-      const transformedResponse = toSnakeCase(
+      const transformedResponse = toCamelCaseKeys(
         endpoint.prepareResponse({
           data: action,
           endpointName,
