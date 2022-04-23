@@ -17,13 +17,13 @@ const ProfileScreen = () => {
   return (
     <List.Section>
       <List.Subheader>User info</List.Subheader>
-      <List.Item>First name: {firstName}</List.Item>
-      <List.Item>Last name: {lastName}</List.Item>
-      <List.Item>Email: {email}</List.Item>
-      <List.Item>Gender: {gender}</List.Item>
+      <List.Item title={`First name: ${firstName}`} />
+      <List.Item title={`Last name: ${lastName}`} />
+      <List.Item title={`Email: ${email}`} />
+      <List.Item title={`Gender: ${gender}`} />
       <List.Subheader>Description</List.Subheader>
-      <List.Item>Education Level: {educationLevel}</List.Item>
-      <List.Item>{description}</List.Item>
+      <List.Item title={`Education Level: ${educationLevel}`} />
+      <List.Item title={description} />
     </List.Section>
   );
 };

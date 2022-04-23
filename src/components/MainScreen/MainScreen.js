@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import ClassesScreen from "../ClassesScreen";
 import UserTypeScreen from "../UserTypeScreen";
 import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
@@ -21,6 +22,7 @@ const MainScreen = ({ navigator }) => {
       {isSignedIn ? (
         <Tab.Navigator>
           <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Classes" component={ClassesScreen} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

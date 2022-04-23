@@ -1,9 +1,17 @@
 import React from "react";
-import { View, StyleSheets } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import ClassesList from "./ClassesList";
+import CreateClass from "./CreateClass";
 
-const ClassesScreen = () => {
-  return;
-  <View></View>;
+const Stack = createStackNavigator();
+
+const ClassesScreen = ({ navigator }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ClassesList" component={ClassesList} />
+      <Stack.Screen name="CreateClass" component={CreateClass} />
+    </Stack.Navigator>
+  );
 };
 
 export default ClassesScreen;

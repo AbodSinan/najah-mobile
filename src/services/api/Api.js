@@ -1,7 +1,12 @@
 import baseApi from "./baseApi";
 import Endpoint from "./Endpoint";
 
-import { prepareRegisterRequest } from "./prepareRequests";
+import {
+  prepareRegisterRequest,
+  prepareCreateClassRequest,
+} from "./prepareRequests";
+
+import { prepareSubjectResponse } from "./prepareResponse";
 
 class Api extends baseApi {
   constructor(...args) {
@@ -22,7 +27,20 @@ class Api extends baseApi {
     reducer: "user",
   });
   getProfile = new Endpoint({ endpoint: "profile", reducer: "user" });
-  getSubjects = new Endpoint({ endpoint: "education/subjects" });
+  getUserClasses = new Endpoint({ endpoint: "booking/user-classes" });
+  createClass = new Endpoint({
+    endpoint: "booking/subject-classes/%s",
+    method: "POST",
+    prepareRequest: prepareCreateClassRequest,
+  });
+  getSubjects = new Endpoint({
+    endpoint: "education/subjects",
+    prepareResponse: prepareSubjectResponse,
+  });
+  getEducationLevels = new Endpoint({ endpoint: "education/education-levels" });
+  getSubjectCategories = new Endpoint({
+    endpoint: "education/subject-categories ",
+  });
   classBookings = new Endpoint({ endpoint: "booking/class-bookings/%s" });
   subjectClasses = new Endpoint({ endpoint: "booking/subject-classes/%s" });
 }

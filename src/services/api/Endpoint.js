@@ -1,13 +1,13 @@
 import * as actions from "../../actions/api";
-import { toCamelCaseKeys, toSnakeKeys } from "../../utils/commonUtils";
 import { defaultPrepareRequest } from "./prepareRequests";
+import { defaultPrepareResponse } from "./prepareResponse";
 
 class Endpoint {
   constructor({
     endpoint,
     method = "GET",
     prepareRequest = defaultPrepareRequest,
-    prepareResponse = (resp) => toCamelCaseKeys(resp),
+    prepareResponse = defaultPrepareResponse,
     prepareRequestParams = null,
     requestParams = null,
     reducer = "api",
@@ -18,6 +18,8 @@ class Endpoint {
     this.api = null;
     this.prepareRequest = prepareRequest;
     this.prepareResponse = prepareResponse;
+    console.log("endpoint", this.endpoint);
+    console.log("prep req", this.prepareResponse);
     this.prepareRequestParams = prepareRequestParams;
     this.createAction = this.createAction.bind(this);
     this.reducer = reducer;

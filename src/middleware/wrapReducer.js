@@ -34,10 +34,11 @@ const handleTransform = ({ action, state, endpoint }) => {
         endpointName,
         requestParams,
       });
+      console.log(transformedResponse);
 
       return {
         ...state,
-        ...transformedResponse.data.response,
+        ...transformedResponse.response,
         errors: removeError(state.errors, endpointName),
         status: {
           ...state.status,
@@ -96,7 +97,6 @@ const handleApiData = (state, action) => {
     console.warn(`Empty or invalid reducer name given`);
     return state;
   }
-  console.log(endpoint.reducer);
 
   return {
     ...state,

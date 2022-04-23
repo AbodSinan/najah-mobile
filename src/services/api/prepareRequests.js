@@ -14,3 +14,26 @@ export const prepareRegisterRequest = (params) =>
       ...params,
     },
   });
+
+export const prepareCreateClassRequest = (params) => {
+  const {
+    noOfTimes,
+    duration,
+    frequency,
+    subject,
+    subjectCategory,
+    description,
+    educationLevel,
+  } = params;
+  return {
+    urlArgs: [subject],
+    body: {
+      noOfTimes,
+      duration,
+      frequency,
+      subjectCategory,
+      description,
+      educationLevel,
+    },
+  };
+};

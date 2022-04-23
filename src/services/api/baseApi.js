@@ -37,7 +37,6 @@ class baseApi {
   }
 
   prepareRequestParams({ body, token = null, ...otherParams }) {
-    console.log("TOJEN", token);
     const headers = new Headers({
       ...(token && { Authorization: `Token ${token}` }),
       ...(body && { "Content-Type": "application/json" }),

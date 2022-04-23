@@ -7,6 +7,9 @@ function* handleLogin() {
   const token = yield select(selectors.getUserToken);
   api.setToken(token);
   yield put(api.getSubjects.createAction());
+  yield put(api.getUserClasses.createAction());
+  yield put(api.getEducationLevels.createAction());
+  yield put(api.getSubjectCategories.createAction());
 }
 
 function* watchLogin() {
