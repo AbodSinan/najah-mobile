@@ -4,11 +4,20 @@ export const defaultPrepareResponse = ({ data }) => ({
   },
 });
 
-export const prepareSubjectResponse = ({ data, state }) => {
-  console.log(data);
-  return {
-    response: {
-      subjects: [...data.response],
-    },
-  };
-};
+export const prepareSubjectResponse = ({ data, state }) => ({
+  response: {
+    subjects: [...data.response],
+  },
+});
+
+export const prepareEducationLevelsResponse = ({ data, state }) => ({
+  response: {
+    educationLevels: [...data.response],
+  },
+});
+
+export const prepareSubjectCategoryResponse = ({ data, state }) => ({
+  response: {
+    subjectCategories: [...data.response],
+  },
+});

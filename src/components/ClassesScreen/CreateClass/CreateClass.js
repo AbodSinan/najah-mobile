@@ -9,6 +9,7 @@ import {
   getSubjectCategories,
   getEducationLevels,
 } from "../../../sagas/selectors";
+import { filterSubjects } from "../../../utils/commonUtils";
 import api from "../../../services/api/Api";
 import frequencyEnum from "../../../enums/frequencyEnum";
 import { extractLabelList } from "../../../utils/commonUtils";
@@ -19,7 +20,6 @@ const CreateClass = ({ navigator }) => {
     label: key[0],
     value: key[1],
   }));
-  console.log(frequencyList);
 
   const subjects = useSelector(getSubjects);
   const subjectCategories = useSelector(getSubjectCategories);
@@ -30,6 +30,22 @@ const CreateClass = ({ navigator }) => {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedSubjectCategory, setSelectedSubjectCategory] = useState(null);
   const [selectedEducationLevel, setSelectedEducationLevel] = useState(null);
+
+  const [showSubjectCategoryDropdown, setShowSubjectCategoryDropdown] =
+    useState(false);
+  const [showEducationLevelDropdown, setShowEducationLevelDropdown] =
+    useState(false);
+
+  console.log("SELECTEDCAT", selectedSubjectCategory);
+  console.log("SELECT UDE", selectedEducationLevel);
+
+  const filteredSubjects = filterSubjects({
+    subjects,
+    subjectCategories: [selectedSubject],
+    educationLevels: [selectedEducationLevel],
+  });
+  console.log(filteredSubjects);
+
   const [duration, setDuration] = useState(null);
   const [noOfTimes, setNoOfTimes] = useState(null);
   const [frequency, setFrequency] = useState(frequencyEnum.MONTHLY);
@@ -53,6 +69,26 @@ const CreateClass = ({ navigator }) => {
   return (
     <View>
       <DropDown
+        label={"Subject Category"}
+        mode={"outlined"}
+        visible={showSubjectCategoryDropdown}
+        showDropDown={() => setShowSubjectCategoryDropdown(true)}
+        onDismiss={() => setShowSubjectCategoryDropdown(false)}
+        value={selectedSubjectCategory}
+        setValue={setSelectedSubjectCategory}
+        list={extractLabelList(subjectCategories)}
+      />
+      <DropDown
+        label={"Education Levels"}
+        mode={"outlined"}
+        visible={showEducationLevelDropdown}
+        showDropDown={() => setShowEducationLevelDropdown(true)}
+        onDismiss={() => setShowEducationLevelDropdown(false)}
+        value={selectedEducationLevel}
+        setValue={setSelectedEducationLevel}
+        list={extractLabelList(educationLevels)}
+      />
+      <DropDown
         label={"Subject"}
         mode={"outlined"}
         visible={showSubjectDropdown}
@@ -60,7 +96,7 @@ const CreateClass = ({ navigator }) => {
         onDismiss={() => setShowSubjectDropdown(false)}
         value={selectedSubject}
         setValue={setSelectedSubject}
-        list={extractLabelList(subjects)}
+        list={extractLabelList(filteredSubjects)}
       />
       <DropDown
         label={"Frequency"}

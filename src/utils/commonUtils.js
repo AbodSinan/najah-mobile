@@ -1,23 +1,21 @@
 import { chain, isPlainObject, isArray, isString } from "lodash";
 
-export const transformString = ({ str, format }) => {
+function transformString({ str, method }) {
   if (!isString(str)) {
     return str;
   }
 
-  if (format === "snake") {
-    return (
-      str[0].toLowerCase() +
-      str
-        .slice(1, str.length)
-        .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+  if (method === "snake") {
+    return str.replace(
+      /([a-z][A-Z]|[a-z][0-9])/g,
+      (match) => `${match[0]}_${match[1].toLocaleLowerCase()}`
     );
   }
 
-  return str
-    .toLowerCase()
-    .replace(/[-_][a-z]/g, (group) => group.slice(-1).toUpperCase());
-};
+  return str.replace(/_([a-z]|[A-Z]|[0-9])/g, (match) =>
+    match[1].toUpperCase()
+  );
+}
 
 export const transformKeys = ({ obj, format }) => {
   if (isPlainObject(obj)) {
@@ -49,5 +47,20 @@ export const removeError = (errors, endpointName) =>
 export const extractLabelList = (list) =>
   list.map((item) => ({
     label: item.name,
-    valude: item.id,
+    value: item.id,
   }));
+
+export const filterSubjects = ({
+  subjects,
+  subjectCategoryId,
+  educationLevelId,
+}) => {
+  return chain(subjects)
+    .filter(
+      (subject) =>
+        (!subjectCategoryId ||
+          subjectCategoryId === subject.subjectCategory.id) &&
+        (!educationLevelId || educationLevelId === subject.educationLevel.id)
+    )
+    .value();
+};
