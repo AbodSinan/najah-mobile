@@ -1,7 +1,7 @@
 import { takeEvery, all, select, put } from "redux-saga/effects";
 import api from "../services/api/Api";
 import * as selectors from "./selectors";
-import { apiCallSuccessChannel } from "../utils/commonUtils";
+import { apiCallSuccessChannel } from "../utils/apiUtils";
 
 function* handleLogin() {
   const token = yield select(selectors.getUserToken);

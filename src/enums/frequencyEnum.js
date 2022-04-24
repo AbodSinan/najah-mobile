@@ -1,7 +1,7 @@
 const frequencyEnum = Object.freeze({
-  DAILY: 0,
-  WEEKLY: 1,
-  MONTHLY: 2,
+  DAILY: "D",
+  WEEKLY: "W",
+  MONTHLY: "M",
 });
 
 export default frequencyEnum;

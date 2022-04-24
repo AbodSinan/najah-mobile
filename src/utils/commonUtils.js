@@ -1,7 +1,5 @@
 import { chain, isPlainObject, isArray, isString } from "lodash";
 
-import * as actions from "../actions/api";
-
 export const transformString = ({ str, format }) => {
   if (!isString(str)) {
     return str;
@@ -47,16 +45,9 @@ export const removeError = (errors, endpointName) =>
     .filter((error) => error.endpointName !== endpointName)
     .value();
 
-export const apiCallSuccessChannel = (endpointName) => (action) => {
-  return (
-    action.type === actions.API_CALL_SUCCESS &&
-    action.endpointName === endpointName
-  );
-};
-
-export const apiCallErrorChannel = (endpointName) => (action) => {
-  return (
-    action.type === actions.API_CALL_ERROR &&
-    action.endpointName === endpointName
-  );
-};
+/* Extract label:value from a list of objects, for listing */
+export const extractLabelList = (list) =>
+  list.map((item) => ({
+    label: item.name,
+    valude: item.id,
+  }));

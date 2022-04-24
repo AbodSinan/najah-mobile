@@ -11,23 +11,30 @@ import {
 } from "../../../sagas/selectors";
 import api from "../../../services/api/Api";
 import frequencyEnum from "../../../enums/frequencyEnum";
+import { extractLabelList } from "../../../utils/commonUtils";
 
 const CreateClass = ({ navigator }) => {
   const dispatcher = useDispatch();
+  const frequencyList = Object.entries(frequencyEnum).map((key) => ({
+    label: key[0],
+    value: key[1],
+  }));
+  console.log(frequencyList);
 
   const subjects = useSelector(getSubjects);
   const subjectCategories = useSelector(getSubjectCategories);
   const educationLevels = useSelector(getEducationLevels);
 
   const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
+  const [showFrequencyDropdown, setShowFrequencyDropdown] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedSubjectCategory, setSelectedSubjectCategory] = useState(null);
   const [selectedEducationLevel, setSelectedEducationLevel] = useState(null);
-  const [duration, setDuration] = useState(0);
-  const [noOfTimes, setNoOfTimes] = useState(0);
+  const [duration, setDuration] = useState(null);
+  const [noOfTimes, setNoOfTimes] = useState(null);
   const [frequency, setFrequency] = useState(frequencyEnum.MONTHLY);
   const [description, setDescription] = useState("");
-  const [ratePerHour, setRatePerHour] = useState(0);
+  const [ratePerHour, setRatePerHour] = useState(null);
 
   const handleSubmit = () => {
     dispatcher(
@@ -53,7 +60,17 @@ const CreateClass = ({ navigator }) => {
         onDismiss={() => setShowSubjectDropdown(false)}
         value={selectedSubject}
         setValue={setSelectedSubject}
-        list={subjects}
+        list={extractLabelList(subjects)}
+      />
+      <DropDown
+        label={"Frequency"}
+        mode={"outlined"}
+        visible={showFrequencyDropdown}
+        showDropDown={() => setShowFrequencyDropdown(true)}
+        onDismiss={() => setShowFrequencyDropdown(false)}
+        value={frequency}
+        setValue={setFrequency}
+        list={frequencyList}
       />
       <TextInput
         style={styles.input}
