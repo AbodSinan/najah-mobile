@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView } from "react-native";
 import { Card, Paragraph } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import {
@@ -10,6 +10,8 @@ import {
   getSubjects,
 } from "../../../sagas/selectors";
 import { extractLabelList, filterSubjects } from "../../../utils/commonUtils";
+
+import styles from "../../../styles";
 
 const SearchClass = ({ navigation }) => {
   const educationLevels = useSelector(getEducationLevels);
@@ -66,30 +68,5 @@ const SearchClass = ({ navigation }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 50,
-    paddingHorizontal: 12,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#444",
-    alignSelf: "center",
-    paddingBottom: 24,
-  },
-  input: {
-    backgroundColor: "#fff",
-    marginBottom: 20,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#333",
-    borderRadius: 8,
-    padding: 12,
-  },
-});
 
 export default SearchClass;

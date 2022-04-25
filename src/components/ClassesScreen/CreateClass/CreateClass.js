@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextInput, Button } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { StyleSheet, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 
 import {
   getSubjects,
@@ -13,6 +13,7 @@ import { filterSubjects } from "../../../utils/commonUtils";
 import api from "../../../services/api/Api";
 import frequencyEnum from "../../../enums/frequencyEnum";
 import { extractLabelList } from "../../../utils/commonUtils";
+import styles from "../../../styles";
 
 const CreateClass = ({ navigator }) => {
   const dispatcher = useDispatch();
@@ -146,30 +147,5 @@ const CreateClass = ({ navigator }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 50,
-    paddingHorizontal: 12,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#444",
-    alignSelf: "center",
-    paddingBottom: 24,
-  },
-  input: {
-    backgroundColor: "#fff",
-    marginBottom: 20,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#333",
-    borderRadius: 8,
-    padding: 12,
-  },
-});
 
 export default CreateClass;

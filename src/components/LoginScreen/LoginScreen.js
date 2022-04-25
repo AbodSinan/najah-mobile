@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as selectors from "../../sagas/selectors";
+import { Text, View } from "react-native";
+import { Button, TextInput, Title } from "react-native-paper";
 
 import api from "../../services/api/Api";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import * as selectors from "../../sagas/selectors";
+import styles from "../../styles";
 
 const LoginScreen = ({ navigation }) => {
+  const dispatcher = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatcher = useDispatch();
 
   const userToken = useSelector(selectors.getUserToken);
 
@@ -30,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome back!</Text>
+      <Title style={styles.title}>Welcome back!</Title>
       <TextInput
         style={styles.input}
         placeholder="Enter email"
@@ -41,6 +43,7 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
+        mode="outlined"
         style={styles.input}
         placeholder="Enter password"
         autoCapitalize="none"
@@ -50,37 +53,13 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button onPress={onHandleLogin} color="#f57c00" title="Login" />
-      <Button
-        onPress={() => navigation.navigate("Register")}
-        title="Go to Signup"
-      />
+      <Button mode="contained" onPress={onHandleLogin}>
+        Login
+      </Button>
+      <Button mode="text" onPress={() => navigation.navigate("Register")}>
+        Register
+      </Button>
     </View>
   );
 };
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 50,
-    paddingHorizontal: 12,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#444",
-    alignSelf: "center",
-    paddingBottom: 24,
-  },
-  input: {
-    backgroundColor: "#fff",
-    marginBottom: 20,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#333",
-    borderRadius: 8,
-    padding: 12,
-  },
-});

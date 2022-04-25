@@ -1,3 +1,5 @@
+import { REHYDRATE } from "redux-persist/lib/constants";
+
 const defaultState = Object.freeze({
   userBookings: [],
   userClasses: [],

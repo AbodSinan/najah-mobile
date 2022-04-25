@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavigationContainer } from "@react-navigation/native";
+import { View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import ClassesScreen from "../ClassesScreen";
@@ -19,9 +19,9 @@ const Tab = createMaterialBottomTabNavigator();
 const MainScreen = ({ navigator }) => {
   const isSignedIn = !!useSelector(getUserToken);
   return (
-    <NavigationContainer>
+    <>
       {isSignedIn ? (
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName="SearchClass">
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Classes" component={ClassesScreen} />
           <Tab.Screen name="SearchClass" component={SearchClassScreen} />
@@ -33,7 +33,7 @@ const MainScreen = ({ navigator }) => {
           <Stack.Screen name="Register" component={RegisterScreen} />
         </Stack.Navigator>
       )}
-    </NavigationContainer>
+    </>
   );
 };
 
