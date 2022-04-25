@@ -1,11 +1,11 @@
 import { chain, isPlainObject, isArray, isString } from "lodash";
 
-function transformString({ str, method }) {
+function transformString({ str, format }) {
   if (!isString(str)) {
     return str;
   }
 
-  if (method === "snake") {
+  if (format === "snake") {
     return str.replace(
       /([a-z][A-Z]|[a-z][0-9])/g,
       (match) => `${match[0]}_${match[1].toLocaleLowerCase()}`

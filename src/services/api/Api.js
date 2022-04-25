@@ -23,7 +23,10 @@ class Api extends baseApi {
     reducer: "user",
   });
   getProfile = new Endpoint({ endpoint: "profile", reducer: "user" });
-  getUserClasses = new Endpoint({ endpoint: "booking/user-classes" });
+  getUserClasses = new Endpoint({
+    endpoint: "booking/user-classes",
+    prepareResponse: prepareResponseUtils.prepareUserClassesResponse,
+  });
   createClass = new Endpoint({
     endpoint: "booking/subject-classes/%s",
     method: "POST",

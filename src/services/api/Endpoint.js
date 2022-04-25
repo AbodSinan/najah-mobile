@@ -1,6 +1,7 @@
 import * as actions from "../../actions/api";
 import { defaultPrepareRequest } from "./prepareRequests";
 import { defaultPrepareResponse } from "./prepareResponse";
+import { toSnakeKeys } from "../../utils/commonUtils";
 
 class Endpoint {
   constructor({
@@ -43,7 +44,8 @@ class Endpoint {
 
   call(params = {}) {
     const { body, urlArgs } = this.prepareRequest(params);
-
+    const parsedBody = body;
+    console.log("this.api.token", this.api.token);
     const token = this.api.token;
     const endpoint = this.endpoint;
     const data = this.api.sendRequest(
@@ -51,7 +53,7 @@ class Endpoint {
       {
         method: this.method,
         token,
-        body: this.method === "GET" ? undefined : body,
+        body: this.method === "GET" ? undefined : toSnakeKeys(parsedBody),
         urlArgs,
       },
       this

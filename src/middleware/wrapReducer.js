@@ -98,6 +98,13 @@ const handleApiData = (state, action) => {
     console.warn(`Empty or invalid reducer name given`);
     return state;
   }
+  console.log(
+    handleTransform({
+      action,
+      state: state[endpoint.reducer],
+      endpoint,
+    })
+  );
 
   return {
     ...state,

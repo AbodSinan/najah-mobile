@@ -70,6 +70,7 @@ class baseApi {
 
   async sendRequest(endpointUrl, options, endpoint) {
     const { urlArgs, ...requestParams } = options;
+
     const url = this.constructUrl(endpointUrl, urlArgs);
     const preparedRequestParams = endpoint.prepareRequestParams(requestParams);
     const response = await this.executeRequest(url, preparedRequestParams);

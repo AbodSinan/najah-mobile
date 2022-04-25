@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextInput, Button } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 
 import {
   getSubjects,
@@ -46,18 +46,18 @@ const CreateClass = ({ navigator }) => {
   });
   console.log(filteredSubjects);
 
-  const [duration, setDuration] = useState(null);
-  const [noOfTimes, setNoOfTimes] = useState(null);
+  const [duration, setDuration] = useState("");
+  const [noOfTimes, setNoOfTimes] = useState("");
   const [frequency, setFrequency] = useState(frequencyEnum.MONTHLY);
   const [description, setDescription] = useState("");
-  const [ratePerHour, setRatePerHour] = useState(null);
+  const [ratePerHour, setRatePerHour] = useState("");
 
   const handleSubmit = () => {
     dispatcher(
       api.createClass.createAction({
-        selectedSubject,
-        selectedEducationLevel,
-        selectedSubjectCategory,
+        subject: selectedSubject,
+        educationLevel: selectedEducationLevel,
+        subjectCategory: selectedSubjectCategory,
         duration,
         noOfTimes,
         frequency,
@@ -67,10 +67,11 @@ const CreateClass = ({ navigator }) => {
     );
   };
   return (
-    <View>
+    <ScrollView>
       <DropDown
         label={"Subject Category"}
         mode={"outlined"}
+        style={styles.input}
         visible={showSubjectCategoryDropdown}
         showDropDown={() => setShowSubjectCategoryDropdown(true)}
         onDismiss={() => setShowSubjectCategoryDropdown(false)}
@@ -81,6 +82,7 @@ const CreateClass = ({ navigator }) => {
       <DropDown
         label={"Education Levels"}
         mode={"outlined"}
+        style={styles.input}
         visible={showEducationLevelDropdown}
         showDropDown={() => setShowEducationLevelDropdown(true)}
         onDismiss={() => setShowEducationLevelDropdown(false)}
@@ -91,6 +93,7 @@ const CreateClass = ({ navigator }) => {
       <DropDown
         label={"Subject"}
         mode={"outlined"}
+        style={styles.input}
         visible={showSubjectDropdown}
         showDropDown={() => setShowSubjectDropdown(true)}
         onDismiss={() => setShowSubjectDropdown(false)}
@@ -101,6 +104,7 @@ const CreateClass = ({ navigator }) => {
       <DropDown
         label={"Frequency"}
         mode={"outlined"}
+        style={styles.input}
         visible={showFrequencyDropdown}
         showDropDown={() => setShowFrequencyDropdown(true)}
         onDismiss={() => setShowFrequencyDropdown(false)}
@@ -136,8 +140,10 @@ const CreateClass = ({ navigator }) => {
         onChangeText={(text) => setDescription(text)}
         multiline
       />
-      <Button mode="contained" onPress={handleSubmit} title="Submit" />
-    </View>
+      <Button mode="contained" onPress={handleSubmit} title="Submit">
+        Submit
+      </Button>
+    </ScrollView>
   );
 };
 

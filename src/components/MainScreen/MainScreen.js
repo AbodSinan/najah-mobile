@@ -8,6 +8,7 @@ import UserTypeScreen from "../UserTypeScreen";
 import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
 import ProfileScreen from "../ProfileScreen";
+import SearchClassScreen from "../SearchClassScreen/SearchClass";
 
 import { getUserToken } from "../../sagas/selectors";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -23,6 +24,7 @@ const MainScreen = ({ navigator }) => {
         <Tab.Navigator>
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Classes" component={ClassesScreen} />
+          <Tab.Screen name="SearchClass" component={SearchClassScreen} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

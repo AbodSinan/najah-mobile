@@ -1,9 +1,11 @@
 import React from "react";
-import { List } from "react-native-paper";
+import { List, Button } from "react-native-paper";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as userActions from "../../actions/user";
 import * as selectors from "../../sagas/selectors";
 const ProfileScreen = () => {
+  const dispatch = useDispatch();
   const {
     firstName,
     lastName,
@@ -13,6 +15,10 @@ const ProfileScreen = () => {
     educationLevel,
     email,
   } = useSelector(selectors.getUserInfo);
+
+  const handleLogout = () => {
+    dispatch(userActions.logout());
+  };
 
   return (
     <List.Section>
@@ -24,6 +30,7 @@ const ProfileScreen = () => {
       <List.Subheader>Description</List.Subheader>
       <List.Item title={`Education Level: ${educationLevel}`} />
       <List.Item title={description} />
+      <Button onPress={handleLogout}>Logout</Button>
     </List.Section>
   );
 };

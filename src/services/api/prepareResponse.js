@@ -21,3 +21,22 @@ export const prepareSubjectCategoryResponse = ({ data, state }) => ({
     subjectCategories: [...data.response],
   },
 });
+
+export const prepareClassesResponse = ({ data, state }) => ({
+  response: {
+    classes: [...data.response],
+  },
+});
+
+export const prepareUserClassesResponse = ({ data, state }) => ({
+  response: {
+    userClasses: [...data.response],
+  },
+});
+
+export const prepareCreateClassResponse = ({ data, state }) => ({
+  response: {
+    userClasses: [...state.userClasses, ...data.response],
+    classes: [...state.classes, ...data.response],
+  },
+});
