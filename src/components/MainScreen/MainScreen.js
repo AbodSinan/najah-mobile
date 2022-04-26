@@ -21,7 +21,7 @@ const MainScreen = ({ navigator }) => {
   return (
     <>
       {isSignedIn ? (
-        <Tab.Navigator initialRouteName="SearchClass">
+        <Tab.Navigator initialRouteName="Profile">
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Classes" component={ClassesScreen} />
           <Tab.Screen name="SearchClass" component={SearchClassScreen} />

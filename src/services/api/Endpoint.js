@@ -45,7 +45,7 @@ class Endpoint {
   call(params = {}) {
     const { body, urlArgs } = this.prepareRequest(params);
     const parsedBody = body;
-    console.log("this.api.token", this.api.token);
+
     const token = this.api.token;
     const endpoint = this.endpoint;
     const data = this.api.sendRequest(

@@ -1,4 +1,5 @@
 import { REHYDRATE } from "redux-persist/lib/constants";
+import { rehydrateReducer } from "../utils/reducerUtils";
 
 const defaultState = Object.freeze({
   userBookings: [],
@@ -15,7 +16,17 @@ export default function apiReducer(state = defaultState, action) {
     case REHYDRATE: {
       const incoming = action.payload && action.payload.api;
       return Object.freeze({
-        ...incoming,
+        ...rehydrateReducer(
+          [
+            "userBookings",
+            "userClasses",
+            "subjectCategories",
+            "educationLevels",
+            "subjects",
+          ],
+          state,
+          incoming
+        ),
       });
     }
     default:

@@ -1,4 +1,5 @@
 import { chain, isPlainObject, isArray, isString } from "lodash";
+import apiStatusEnum from "../enums/apiStatusEnum";
 
 function transformString({ str, format }) {
   if (!isString(str)) {
@@ -42,6 +43,11 @@ export const removeError = (errors, endpointName) =>
   chain(errors)
     .filter((error) => error.endpointName !== endpointName)
     .value();
+
+export const requestStatus = (currentStatus) =>
+  [apiStatusEnum.SUCCESS, apiStatusEnum.RELOADING].includes(currentStatus)
+    ? apiStatusEnum.RELOADING
+    : apiStatusEnum.REQUESTED;
 
 /* Extract label:value from a list of objects, for listing */
 export const extractLabelList = (list) =>

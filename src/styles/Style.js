@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
   },
   input: {
-    marginBottom: 20,
+    marginBottom: 50,
     padding: 12,
   },
 });

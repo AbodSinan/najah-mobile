@@ -31,14 +31,13 @@ const SearchClass = ({ navigation }) => {
     subjectCategories: [selectedSubjectCategory],
     educationLevels: [selectedEducationLevel],
   });
-  console.log(filteredSubjects);
 
   return (
     <ScrollView>
       <DropDown
         label={"Education Levels"}
         mode={"outlined"}
-        style={styles.input}
+        dropDownStyle={styles.input}
         visible={showEducationLevelDropdown}
         showDropDown={() => setShowEducationLevelDropdown(true)}
         onDismiss={() => setShowEducationLevelDropdown(false)}

@@ -12,23 +12,9 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const userToken = useSelector(selectors.getUserToken);
-
   const onHandleLogin = () => {
     dispatcher(api.login.createAction({ email, password }));
   };
-
-  useEffect(() => {
-    if (userToken) {
-      navigation.navigate("Main");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (userToken) {
-      navigation.navigate("Main");
-    }
-  }, [userToken]);
 
   return (
     <View style={styles.container}>

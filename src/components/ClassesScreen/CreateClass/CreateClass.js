@@ -37,15 +37,11 @@ const CreateClass = ({ navigator }) => {
   const [showEducationLevelDropdown, setShowEducationLevelDropdown] =
     useState(false);
 
-  console.log("SELECTEDCAT", selectedSubjectCategory);
-  console.log("SELECT UDE", selectedEducationLevel);
-
   const filteredSubjects = filterSubjects({
     subjects,
     subjectCategories: [selectedSubject],
     educationLevels: [selectedEducationLevel],
   });
-  console.log(filteredSubjects);
 
   const [duration, setDuration] = useState("");
   const [noOfTimes, setNoOfTimes] = useState("");

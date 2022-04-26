@@ -1,16 +1,15 @@
 import { isEqual } from "lodash";
-import { removeError, toCamelCaseKeys } from "../utils/commonUtils";
+import {
+  removeError,
+  toCamelCaseKeys,
+  requestStatus,
+} from "../utils/commonUtils";
 import { v4 as uuid } from "uuid";
 
 import apiStatusEnum from "../enums/apiStatusEnum";
 
 import * as actions from "../actions/api";
 import api from "../services/api/Api";
-
-const requestStatus = (currentStatus) =>
-  [apiStatusEnum.SUCCESS, apiStatusEnum.RELOADING].includes(currentStatus)
-    ? apiStatusEnum.RELOADING
-    : apiStatusEnum.REQUESTED;
 
 const handleTransform = ({ action, state, endpoint }) => {
   const { endpointName, requestParams, error, stateOptions = {} } = action;
@@ -98,13 +97,6 @@ const handleApiData = (state, action) => {
     console.warn(`Empty or invalid reducer name given`);
     return state;
   }
-  console.log(
-    handleTransform({
-      action,
-      state: state[endpoint.reducer],
-      endpoint,
-    })
-  );
 
   return {
     ...state,

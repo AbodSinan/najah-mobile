@@ -6,7 +6,7 @@ import { apiCallSuccessChannel } from "../utils/apiUtils";
 function* handleLogin() {
   const token = yield select(selectors.getUserToken);
   api.setToken(token);
-  console.log("THIS TOKEN", api.token);
+
   yield put(api.getSubjects.createAction());
   yield put(api.getUserClasses.createAction());
   yield put(api.getEducationLevels.createAction());
