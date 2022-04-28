@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import ClassesScreen from "../ClassesScreen";
@@ -8,7 +7,7 @@ import UserTypeScreen from "../UserTypeScreen";
 import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
 import ProfileScreen from "../ProfileScreen";
-import SearchClassScreen from "../SearchClassScreen/SearchClass";
+import SearchClassScreen from "../SearchClassScreen";
 
 import { getUserToken } from "../../sagas/selectors";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";

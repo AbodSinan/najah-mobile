@@ -13,7 +13,7 @@ import { extractLabelList, filterSubjects } from "../../../utils/commonUtils";
 
 import styles from "../../../styles";
 
-const SearchClass = ({ navigation }) => {
+const SearchSubject = ({ navigation }) => {
   const educationLevels = useSelector(getEducationLevels);
   const subjectCategories = useSelector(getSubjectCategories);
   const subjects = useSelector(getSubjects);
@@ -68,4 +68,4 @@ const SearchClass = ({ navigation }) => {
   );
 };
 
-export default SearchClass;
+export default SearchSubject;
