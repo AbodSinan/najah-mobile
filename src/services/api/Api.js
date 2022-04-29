@@ -27,6 +27,10 @@ class Api extends baseApi {
     endpoint: "booking/user-classes",
     prepareResponse: prepareResponseUtils.prepareUserClassesResponse,
   });
+  getClasses = new Endpoint({
+    endpoint: "booking/classes",
+    prepareResponse: prepareResponseUtils.prepareClassesResponse,
+  });
   createClass = new Endpoint({
     endpoint: "booking/subject-classes/%s",
     method: "POST",
@@ -45,6 +49,11 @@ class Api extends baseApi {
     prepareResponse: prepareResponseUtils.prepareSubjectCategoryResponse,
   });
   classBookings = new Endpoint({ endpoint: "booking/class-bookings/%s" });
+  createClassBooking = new Endpoint({
+    endpoint: "booking/class-bookings/%s",
+    method: "POST",
+    prepareRequest: prepareRequestUtils.prepareCreateClassBookingRequest,
+  });
   subjectClasses = new Endpoint({ endpoint: "booking/subject-classes/%s" });
 }
 

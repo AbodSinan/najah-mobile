@@ -4,6 +4,12 @@ export const defaultPrepareResponse = ({ data }) => ({
   },
 });
 
+export const prepareClassesResponse = ({ data, state }) => ({
+  response: {
+    classes: [...data.response],
+  },
+});
+
 export const prepareSubjectResponse = ({ data, state }) => ({
   response: {
     subjects: [...data.response],
@@ -19,12 +25,6 @@ export const prepareEducationLevelsResponse = ({ data, state }) => ({
 export const prepareSubjectCategoryResponse = ({ data, state }) => ({
   response: {
     subjectCategories: [...data.response],
-  },
-});
-
-export const prepareClassesResponse = ({ data, state }) => ({
-  response: {
-    classes: [...data.response],
   },
 });
 

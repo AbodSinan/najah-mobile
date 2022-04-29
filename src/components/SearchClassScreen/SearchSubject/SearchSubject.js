@@ -32,6 +32,10 @@ const SearchSubject = ({ navigation }) => {
     educationLevels: [selectedEducationLevel],
   });
 
+  const handleSubjectPress = (subjectId) => {
+    navigation.navigate("SubjectClasses", { subjectId });
+  };
+
   return (
     <ScrollView>
       <DropDown
@@ -57,7 +61,7 @@ const SearchSubject = ({ navigation }) => {
         list={extractLabelList(subjectCategories)}
       />
       {subjects.map((subject) => (
-        <Card>
+        <Card onPress={() => handleSubjectPress(subject.id)}>
           <Card.Title title={subject.name} />
           <Card.Content>
             <Paragraph>{subject.description}</Paragraph>

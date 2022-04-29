@@ -8,6 +8,7 @@ function* handleLogin() {
   api.setToken(token);
 
   yield put(api.getSubjects.createAction());
+  yield put(api.getClasses.createAction());
   yield put(api.getUserClasses.createAction());
   yield put(api.getEducationLevels.createAction());
   yield put(api.getSubjectCategories.createAction());

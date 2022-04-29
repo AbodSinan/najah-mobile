@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import SubjectClasses from "./SubjectClasses/";
 import SearchSubject from "./SearchSubject";
 
 const Stack = createStackNavigator();
