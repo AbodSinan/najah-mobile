@@ -3,26 +3,26 @@ import { ScrollView } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { selectSubjectClasses } from "../../../sagas/selectors";
+import styles from "../../../styles";
 
 const SubjectClasses = ({ navigation, route }) => {
-  const { subjectId } = route.params || null;
-  console.log(route);
+  const { subject } = route.params || null;
+
   const classes = useSelector((state) =>
-    selectSubjectClasses(state, subjectId)
+    selectSubjectClasses(state, subject.id)
   );
-  console.log(classes);
 
   const handleClassPress = (classId) => {
     navigation.navigate("ClassInfo", { classId });
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       {classes.map((cls) => (
         <Card onPress={() => handleClassPress(cls.id)}>
-          <Card.Title title={cls.name} />
+          <Card.Title title={subject.name} />
           <Card.Content>
-            <Title>{cls.subject.name}</Title>
+            <Title>By {cls.tutor.firstName}</Title>
             <Paragraph>{cls.description}</Paragraph>
           </Card.Content>
         </Card>

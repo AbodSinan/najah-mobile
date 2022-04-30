@@ -5,14 +5,19 @@ import { getUserClasses, getUserType } from "../../../sagas/selectors";
 
 import { Card, Title, Paragraph, Button, Text } from "react-native-paper";
 import UserTypeEnum from "../../../enums/UserTypeEnum";
+import styles from "../../../styles";
 
 const ClassesList = ({ navigation }) => {
   const classes = useSelector(getUserClasses);
   const userType = useSelector(getUserType);
 
+  const handleClassPress = (classId) => {
+    navigation.navigate("ClassInfo", { classId });
+  };
+
   return (
-    <View>
-      <View>
+    <View style={styles.container}>
+      <View style={styles.container}>
         {classes.length === 0 && (
           <Text>
             There are no classes available for this subject, be the first to
@@ -20,11 +25,11 @@ const ClassesList = ({ navigation }) => {
           </Text>
         )}
         {classes.map((cls) => (
-          <Card>
+          <Card onPress={() => handleClassPress(cls.id)}>
             <Card.Title title={cls.subject} />
             <Card.Content>
               <Title>
-                {cls.subject} by {cls.tutor}
+                {cls.subject} by {cls.tutor.firstName} {cls.tutor.lastName}
               </Title>
               <Paragraph>{cls.description}</Paragraph>
             </Card.Content>
@@ -36,6 +41,7 @@ const ClassesList = ({ navigation }) => {
           mode="contained"
           onPress={() => navigation.navigate("CreateClass")}
           title="CREATE CLASS"
+          style={styles.actionbutton}
         >
           Create Class
         </Button>
@@ -43,6 +49,7 @@ const ClassesList = ({ navigation }) => {
         <Button
           mode="contained"
           onPress={() => navigation.navigate("SearchClass")}
+          style={styles.actionbutton}
         >
           Search for a class
         </Button>

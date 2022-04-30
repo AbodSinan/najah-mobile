@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import ClassesScreen from "../ClassesScreen";
 import UserTypeScreen from "../UserTypeScreen";
@@ -10,7 +11,7 @@ import ProfileScreen from "../ProfileScreen";
 import SearchClassScreen from "../SearchClassScreen";
 
 import { getUserToken } from "../../sagas/selectors";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import styles from "../../styles";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -20,7 +21,10 @@ const MainScreen = ({ navigator }) => {
   return (
     <>
       {isSignedIn ? (
-        <Tab.Navigator initialRouteName="Profile">
+        <Tab.Navigator
+          initialRouteName="Profile"
+          screenOptions={{ style: { ...styles.container } }}
+        >
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Classes" component={ClassesScreen} />
           <Tab.Screen name="SearchClass" component={SearchClassScreen} />

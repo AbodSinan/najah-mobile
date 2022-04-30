@@ -47,6 +47,7 @@ class Endpoint {
     const parsedBody = body;
 
     const token = this.api.token;
+    console.log("TOKEN", token);
     const endpoint = this.endpoint;
     const data = this.api.sendRequest(
       endpoint,

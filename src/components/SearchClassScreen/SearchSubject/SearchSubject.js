@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Card, Paragraph } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import {
@@ -32,36 +32,38 @@ const SearchSubject = ({ navigation }) => {
     educationLevels: [selectedEducationLevel],
   });
 
-  const handleSubjectPress = (subjectId) => {
-    navigation.navigate("SubjectClasses", { subjectId });
+  const handleSubjectPress = (subject) => {
+    navigation.navigate("SubjectClasses", { subject });
   };
 
   return (
-    <ScrollView>
-      <DropDown
-        label={"Education Levels"}
-        mode={"outlined"}
-        dropDownStyle={styles.input}
-        visible={showEducationLevelDropdown}
-        showDropDown={() => setShowEducationLevelDropdown(true)}
-        onDismiss={() => setShowEducationLevelDropdown(false)}
-        value={selectedEducationLevel}
-        setValue={setSelectedEducationLevel}
-        list={extractLabelList(educationLevels)}
-      />
-      <DropDown
-        label={"Subject Category"}
-        mode={"outlined"}
-        style={styles.input}
-        visible={showSubjectCategoryDropdown}
-        showDropDown={() => setShowSubjectCategoryDropdown(true)}
-        onDismiss={() => setShowSubjectCategoryDropdown(false)}
-        value={selectedSubjectCategory}
-        setValue={setSelectedSubjectCategory}
-        list={extractLabelList(subjectCategories)}
-      />
+    <ScrollView style={styles.container}>
+      <View style={localStyles.filtersContainer}>
+        <DropDown
+          label={"Education Levels"}
+          mode={"outlined"}
+          dropDownStyle={styles.input}
+          visible={showEducationLevelDropdown}
+          showDropDown={() => setShowEducationLevelDropdown(true)}
+          onDismiss={() => setShowEducationLevelDropdown(false)}
+          value={selectedEducationLevel}
+          setValue={setSelectedEducationLevel}
+          list={extractLabelList(educationLevels)}
+        />
+        <DropDown
+          label={"Subject Category"}
+          mode={"outlined"}
+          style={styles.input}
+          visible={showSubjectCategoryDropdown}
+          showDropDown={() => setShowSubjectCategoryDropdown(true)}
+          onDismiss={() => setShowSubjectCategoryDropdown(false)}
+          value={selectedSubjectCategory}
+          setValue={setSelectedSubjectCategory}
+          list={extractLabelList(subjectCategories)}
+        />
+      </View>
       {subjects.map((subject) => (
-        <Card onPress={() => handleSubjectPress(subject.id)}>
+        <Card onPress={() => handleSubjectPress(subject)}>
           <Card.Title title={subject.name} />
           <Card.Content>
             <Paragraph>{subject.description}</Paragraph>
@@ -71,5 +73,11 @@ const SearchSubject = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+const localStyles = StyleSheet.create({
+  filtersContainer: {
+    marginBottom: 10,
+  },
+});
 
 export default SearchSubject;

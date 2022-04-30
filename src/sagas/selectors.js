@@ -10,12 +10,10 @@ export const getSubjects = (state) => state.api.subjects;
 export const getEducationLevels = (state) => state.api.educationLevels;
 export const getSubjectCategories = (state) => state.api.subjectCategories;
 
-export const selectSubjectClasses = (state, subjectId) => {
-  console.log(state.api.classes);
-  console.log("SUBJECT ID", subjectId);
-  return state.api.classes.filter((cls) => cls.subject === subjectId);
-};
+export const selectEducationLevel = (state, educationLevelId) =>
+  state.api.educationLevels[educationLevelId];
+export const selectSubjectClasses = (state, subjectId) =>
+  state.api.classes.filter((cls) => cls.subject === subjectId);
 
-export const selectClass = (state, classId) => {
-  return state.api.classes.filter((cls) => cls.id === classId);
-};
+export const selectClass = (state, classId) =>
+  state.api.classes.find((cls) => cls.id === classId);
