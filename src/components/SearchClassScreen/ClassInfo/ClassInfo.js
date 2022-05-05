@@ -58,7 +58,7 @@ const ClassInfo = ({ navigation, route }) => {
           />
           <List.Item
             title={"Education Level"}
-            description={tutorEducationLevel}
+            description={tutorEducationLevel.name}
           />
           <List.Item
             title={"Description"}

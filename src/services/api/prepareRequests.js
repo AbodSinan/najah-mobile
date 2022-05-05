@@ -46,3 +46,19 @@ export const prepareCreateClassBookingRequest = (params) => {
     body: {},
   };
 };
+
+export const prepareCreateSubjectRequest = (params) => {
+  return {
+    body: {
+      ...params,
+    },
+  };
+};
+
+export const prepareUpdateProfilePicture = (params) => {
+  return {
+    body: {
+      ...params,
+    },
+  };
+};

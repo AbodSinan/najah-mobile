@@ -44,10 +44,9 @@ class Endpoint {
 
   call(params = {}) {
     const { body, urlArgs } = this.prepareRequest(params);
-    const parsedBody = body;
+    const parsedBody = toSnakeKeys(body);
 
     const token = this.api.token;
-    console.log("TOKEN", token);
     const endpoint = this.endpoint;
     const data = this.api.sendRequest(
       endpoint,

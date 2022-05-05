@@ -28,8 +28,10 @@ const SearchSubject = ({ navigation }) => {
 
   const filteredSubjects = filterSubjects({
     subjects,
-    subjectCategories: [selectedSubjectCategory],
-    educationLevels: [selectedEducationLevel],
+    subjectCategoryIds: selectedSubjectCategory
+      ? [selectedSubjectCategory]
+      : null,
+    educationLevelIds: selectedEducationLevel ? [selectedEducationLevel] : null,
   });
 
   const handleSubjectPress = (subject) => {
@@ -62,7 +64,7 @@ const SearchSubject = ({ navigation }) => {
           list={extractLabelList(subjectCategories)}
         />
       </View>
-      {subjects.map((subject) => (
+      {filteredSubjects.map((subject) => (
         <Card onPress={() => handleSubjectPress(subject)}>
           <Card.Title title={subject.name} />
           <Card.Content>

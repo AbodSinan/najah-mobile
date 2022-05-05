@@ -50,23 +50,30 @@ export const requestStatus = (currentStatus) =>
     : apiStatusEnum.REQUESTED;
 
 /* Extract label:value from a list of objects, for listing */
-export const extractLabelList = (list) =>
-  list.map((item) => ({
+export const extractLabelList = (list, noNull = false) => {
+  const newList = list.map((item) => ({
     label: item.name,
     value: item.id,
   }));
+  if (!noNull) {
+    newList.push({ label: "Any", value: null });
+  }
+
+  return newList;
+};
 
 export const filterSubjects = ({
   subjects,
-  subjectCategoryId,
-  educationLevelId,
+  subjectCategoryIds,
+  educationLevelIds,
 }) => {
   return chain(subjects)
     .filter(
       (subject) =>
-        (!subjectCategoryId ||
-          subjectCategoryId === subject.subjectCategory.id) &&
-        (!educationLevelId || educationLevelId === subject.educationLevel.id)
+        (!subjectCategoryIds ||
+          subjectCategoryIds.includes(subject.subjectCategory.id)) &&
+        (!educationLevelIds ||
+          educationLevelIds.includes(subject.educationLevel))
     )
     .value();
 };

@@ -31,8 +31,8 @@ const MainScreen = ({ navigator }) => {
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>
-          <Stack.Screen name="UserType" component={UserTypeScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="UserType" component={UserTypeScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
         </Stack.Navigator>
       )}

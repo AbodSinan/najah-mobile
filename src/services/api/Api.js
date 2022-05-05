@@ -23,6 +23,11 @@ class Api extends baseApi {
     reducer: "user",
   });
   getProfile = new Endpoint({ endpoint: "profile", reducer: "user" });
+  updateProfilePicture = new Endpoint({
+    endpoint: "profile",
+    method: "PATCH",
+    prepareRequest: prepareRequestUtils.prepareUpdateProfilePicture,
+  });
   getUserClasses = new Endpoint({
     endpoint: "booking/user-classes",
     prepareResponse: prepareResponseUtils.prepareUserClassesResponse,
@@ -39,6 +44,10 @@ class Api extends baseApi {
   getSubjects = new Endpoint({
     endpoint: "education/subjects",
     prepareResponse: prepareResponseUtils.prepareSubjectResponse,
+  });
+  createSubject = new Endpoint({
+    endpoint: "education/subjects",
+    prepareRequest: prepareRequestUtils.prepareCreateSubjectRequest,
   });
   getEducationLevels = new Endpoint({
     endpoint: "education/education-levels",

@@ -11,6 +11,8 @@ const defaultState = Object.freeze({
   lastName: null,
   gender: null,
   educationLevel: null,
+  image: null,
+  description: null,
   errors: [],
   status: {},
 });
@@ -30,6 +32,8 @@ export default function userReducer(state = defaultState, action) {
             "token",
             "userType",
             "educationLevel",
+            "image",
+            "description",
           ],
           state,
           incoming

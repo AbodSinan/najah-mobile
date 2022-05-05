@@ -1,17 +1,23 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
-import { List, Button } from "react-native-paper";
+import { ScrollView, View, StyleSheet } from "react-native";
+import { List, Button, Surface, Divider } from "react-native-paper";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as userActions from "../../actions/user";
 import * as selectors from "../../sagas/selectors";
+
+import ProfileImage from "./ProfileImage";
 import styles from "../../styles";
+import { theme } from "../../styles/theme";
+console.log(theme.colors);
+
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const {
     firstName,
     lastName,
     age,
+    image,
     description,
     gender,
     educationLevel,
@@ -24,17 +30,29 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ProfileImage image={image} />
       <ScrollView>
-        <List.Section>
-          <List.Subheader>User info</List.Subheader>
-          <List.Item title={`First name: ${firstName}`} />
-          <List.Item title={`Last name: ${lastName}`} />
-          <List.Item title={`Email: ${email}`} />
-          <List.Item title={`Gender: ${gender}`} />
-          <List.Subheader>Description</List.Subheader>
-          <List.Item title={`Education Level: ${educationLevel}`} />
-          <List.Item title={description} />
-        </List.Section>
+        <Surface style={localStyles.profileContainer}>
+          <List.Section>
+            <List.Subheader style={localStyles.profileHeader}>
+              User info
+            </List.Subheader>
+            <List.Item title={`First name: ${firstName}`} />
+            <Divider />
+            <List.Item title={`Last name: ${lastName}`} />
+            <Divider />
+            <List.Item title={`Email: ${email}`} />
+            <Divider />
+            <List.Item title={`Gender: ${gender}`} />
+            <Divider />
+            <List.Subheader style={localStyles.profileHeader}>
+              Description
+            </List.Subheader>
+            <List.Item title={`Education Level: ${educationLevel}`} />
+            <Divider />
+            <List.Item title={description} />
+          </List.Section>
+        </Surface>
       </ScrollView>
       <Button
         style={styles.actionbutton}
@@ -46,5 +64,15 @@ const ProfileScreen = () => {
     </View>
   );
 };
+
+const localStyles = StyleSheet.create({
+  profileContainer: {
+    borderRadius: 5,
+  },
+  profileHeader: {
+    color: theme.colors.background,
+    backgroundColor: theme.colors.primary,
+  },
+});
 
 export default ProfileScreen;
