@@ -1,24 +1,13 @@
-import {
-  Provider as PaperProvider,
-  DefaultTheme as PaperDefaultTheme,
-} from "react-native-paper";
-import {
-  NavigationContainer,
-  DefaultTheme as NavigationDefaultTheme,
-} from "@react-navigation/native";
+import { Provider as PaperProvider } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
 import { Provider as StoreProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import merge from "deepmerge";
 
 import configureStore from "./src/store";
+import { theme } from "./src/styles/theme";
 import MainScreen from "./src/components/MainScreen";
 
 const { store, persistor } = configureStore();
-const combinedDefaultTheme = merge(NavigationDefaultTheme, PaperDefaultTheme);
-const theme = {
-  ...combinedDefaultTheme,
-  roundness: 5,
-};
 
 export default function App() {
   return (
