@@ -4,6 +4,7 @@ import { rehydrateReducer } from "../utils/reducerUtils";
 const defaultState = Object.freeze({
   userBookings: [],
   userClasses: [],
+  userPrivateClasses: [],
   subjectCategories: [],
   educationLevels: [],
   classes: [],
@@ -22,6 +23,7 @@ export default function apiReducer(state = defaultState, action) {
           [
             "userBookings",
             "userClasses",
+            "userPrivateClasses",
             "subjectCategories",
             "educationLevels",
             "classes",
