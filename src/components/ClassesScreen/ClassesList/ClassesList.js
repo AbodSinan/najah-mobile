@@ -1,17 +1,33 @@
 import React from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
-import { getUserClasses, getUserType } from "../../../sagas/selectors";
+import {
+  getUserClasses,
+  getUserType,
+  getUserPrivateClasses,
+} from "../../../sagas/selectors";
 
-import { Card, Title, Paragraph, Button, Text } from "react-native-paper";
+import {
+  Card,
+  Title,
+  Paragraph,
+  Button,
+  Text,
+  Headline,
+} from "react-native-paper";
 import UserTypeEnum from "../../../enums/UserTypeEnum";
 import styles from "../../../styles";
 
 const ClassesList = ({ navigation }) => {
   const classes = useSelector(getUserClasses);
+  const privateClasses = useSelector(getUserPrivateClasses);
   const userType = useSelector(getUserType);
 
   const handleClassPress = (classId) => {
+    navigation.navigate("Class Info", { classId });
+  };
+
+  const handlePrivateClassPress = (classId) => {
     navigation.navigate("Class Info", { classId });
   };
 
@@ -24,12 +40,28 @@ const ClassesList = ({ navigation }) => {
             create one!
           </Text>
         )}
+        <Headline>Academy Classes</Headline>
         {classes.map((cls) => (
           <Card onPress={() => handleClassPress(cls.id)} style={styles.card}>
             <Card.Title title={cls.subject} />
             <Card.Content>
               <Title>
                 {cls.subject} by {cls.tutor.firstName} {cls.tutor.lastName}
+              </Title>
+              <Paragraph>{cls.description}</Paragraph>
+            </Card.Content>
+          </Card>
+        ))}
+        <Headline>Private Classes</Headline>
+        {privateClasses.map((cls) => (
+          <Card
+            onPress={() => handlePrivateClassPress(cls.id)}
+            style={styles.card}
+          >
+            <Card.Title title={cls.subject} />
+            <Card.Content>
+              <Title>
+                {cls.subject} by {cls.student.firstName} {cls.student.lastName}
               </Title>
               <Paragraph>{cls.description}</Paragraph>
             </Card.Content>
