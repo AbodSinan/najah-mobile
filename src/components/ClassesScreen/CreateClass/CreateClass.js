@@ -68,6 +68,7 @@ const CreateClass = ({ navigator }) => {
       <DropDown
         label={"Subject Category"}
         mode={"outlined"}
+        inputProps={{ style: styles.dropDown }}
         style={styles.input}
         visible={showSubjectCategoryDropdown}
         showDropDown={() => setShowSubjectCategoryDropdown(true)}
@@ -80,6 +81,7 @@ const CreateClass = ({ navigator }) => {
         label={"Education Levels"}
         mode={"outlined"}
         style={styles.input}
+        inputProps={{ style: styles.dropDown }}
         visible={showEducationLevelDropdown}
         showDropDown={() => setShowEducationLevelDropdown(true)}
         onDismiss={() => setShowEducationLevelDropdown(false)}
@@ -90,6 +92,7 @@ const CreateClass = ({ navigator }) => {
       <DropDown
         label={"Subject"}
         mode={"outlined"}
+        inputProps={{ style: styles.dropDown }}
         style={styles.input}
         visible={showSubjectDropdown}
         showDropDown={() => setShowSubjectDropdown(true)}
@@ -101,6 +104,7 @@ const CreateClass = ({ navigator }) => {
       <DropDown
         label={"Frequency"}
         mode={"outlined"}
+        inputProps={{ style: styles.dropDown }}
         style={styles.input}
         visible={showFrequencyDropdown}
         showDropDown={() => setShowFrequencyDropdown(true)}

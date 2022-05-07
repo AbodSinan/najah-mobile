@@ -35,7 +35,7 @@ const SearchSubject = ({ navigation }) => {
   });
 
   const handleSubjectPress = (subject) => {
-    navigation.navigate("SubjectClasses", { subject });
+    navigation.navigate("Subject Classes", { subject });
   };
 
   return (
@@ -44,6 +44,7 @@ const SearchSubject = ({ navigation }) => {
         <DropDown
           label={"Education Levels"}
           mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
           dropDownStyle={styles.input}
           visible={showEducationLevelDropdown}
           showDropDown={() => setShowEducationLevelDropdown(true)}
@@ -55,6 +56,7 @@ const SearchSubject = ({ navigation }) => {
         <DropDown
           label={"Subject Category"}
           mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
           style={styles.input}
           visible={showSubjectCategoryDropdown}
           showDropDown={() => setShowSubjectCategoryDropdown(true)}

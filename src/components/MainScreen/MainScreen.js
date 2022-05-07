@@ -34,7 +34,7 @@ const MainScreen = ({ navigator }) => {
           }}
         >
           <Tab.Screen
-            name="Classes"
+            name="My Classes"
             component={ClassesScreen}
             options={{
               tabBarIcon: ({ color }) => (
@@ -43,7 +43,7 @@ const MainScreen = ({ navigator }) => {
             }}
           />
           <Tab.Screen
-            name="SearchClass"
+            name="Academy"
             component={SearchClassScreen}
             options={{
               tabBarIcon: ({ color }) => (
@@ -52,7 +52,7 @@ const MainScreen = ({ navigator }) => {
             }}
           />
           <Tab.Screen
-            name="PrivateClasses"
+            name="Private Classes"
             component={PrivateClassesScreen}
             options={{
               tabBarIcon: ({ color }) => (

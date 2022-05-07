@@ -4,6 +4,7 @@ import { IconButton, Button } from "react-native-paper";
 import { launchImageLibrary } from "react-native-image-picker";
 
 import api from "../../../services/api/Api";
+import { theme } from "../../../styles/theme";
 
 const ProfileImage = ({ image }) => {
   const [photo, setPhoto] = useState(image);
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     width: 200,
     borderRadius: 100,
     borderWidth: 2,
+    borderColor: theme.colors.border,
   },
 });
 

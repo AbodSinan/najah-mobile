@@ -35,7 +35,7 @@ const AddSubjectModal = ({ isShown, onDismiss }) => {
           <DropDown
             label={"Subject Category"}
             mode={"outlined"}
-            style={styles.input}
+            inputProps={{ style: styles.dropDown }}
             visible={showSubjectCategoryDropdown}
             showDropDown={() => setShowSubjectCategoryDropdown(true)}
             onDismiss={() => setShowSubjectCategoryDropdown(false)}
@@ -46,7 +46,7 @@ const AddSubjectModal = ({ isShown, onDismiss }) => {
           <DropDown
             label={"Education Levels"}
             mode={"outlined"}
-            style={styles.input}
+            inputProps={{ style: styles.dropDown }}
             visible={showEducationLevelDropdown}
             showDropDown={() => setShowEducationLevelDropdown(true)}
             onDismiss={() => setShowEducationLevelDropdown(false)}

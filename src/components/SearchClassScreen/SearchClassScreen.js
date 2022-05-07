@@ -19,9 +19,9 @@ const ClassesScreen = ({ navigator }) => {
         },
       }}
     >
-      <Stack.Screen name="SearchSubject" component={SearchSubject} />
-      <Stack.Screen name="SubjectClasses" component={SubjectClasses} />
-      <Stack.Screen name="ClassInfo" component={ClassInfo} />
+      <Stack.Screen name="Search Subject" component={SearchSubject} />
+      <Stack.Screen name="Subject Classes" component={SubjectClasses} />
+      <Stack.Screen name="Class Info" component={ClassInfo} />
     </Stack.Navigator>
   );
 };

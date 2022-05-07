@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Button, Title } from "react-native-paper";
 
 import * as selectors from "../../sagas/selectors";
 import api from "../../services/api/Api";
@@ -34,7 +34,7 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Create new account</Text>
+      <Title style={styles.title}>Create new account</Title>
       <TextInput
         style={styles.input}
         placeholder="Enter email"

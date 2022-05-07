@@ -17,9 +17,9 @@ const ClassesScreen = ({ navigator }) => {
         },
       }}
     >
-      <Stack.Screen name="ClassesList" component={ClassesList} />
-      <Stack.Screen name="CreateClass" component={CreateClass} />
-      <Stack.Screen name="ClassInfo" component={ClassInfo} />
+      <Stack.Screen name="My Classes" component={ClassesList} />
+      <Stack.Screen name="Create Class" component={CreateClass} />
+      <Stack.Screen name="Class Info" component={ClassInfo} />
     </Stack.Navigator>
   );
 };

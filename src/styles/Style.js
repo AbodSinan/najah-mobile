@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.card,
     borderWidth: 2,
     borderColor: theme.colors.border,
+    marginBottom: 8,
   },
   fab: {
     backgroundColor: theme.colors.primary,
@@ -31,6 +32,9 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+  },
+  dropDown: {
+    marginBottom: 8,
   },
 });
 

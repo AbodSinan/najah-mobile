@@ -12,7 +12,7 @@ const ClassesList = ({ navigation }) => {
   const userType = useSelector(getUserType);
 
   const handleClassPress = (classId) => {
-    navigation.navigate("ClassInfo", { classId });
+    navigation.navigate("Class Info", { classId });
   };
 
   return (
@@ -39,7 +39,7 @@ const ClassesList = ({ navigation }) => {
       {userType === UserTypeEnum.TUTOR ? (
         <Button
           mode="contained"
-          onPress={() => navigation.navigate("CreateClass")}
+          onPress={() => navigation.navigate("Create Class")}
           title="CREATE CLASS"
           style={styles.actionbutton}
         >
@@ -48,7 +48,7 @@ const ClassesList = ({ navigation }) => {
       ) : (
         <Button
           mode="contained"
-          onPress={() => navigation.navigate("SearchClass")}
+          onPress={() => navigation.navigate("Academy")}
           style={styles.actionbutton}
         >
           Search for a class

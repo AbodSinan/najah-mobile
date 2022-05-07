@@ -55,6 +55,7 @@ const CreatePrivateClass = ({ navigation }) => {
         <DropDown
           label={"Subject Category"}
           mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
           style={styles.input}
           visible={showSubjectCategoryDropdown}
           showDropDown={() => setShowSubjectCategoryDropdown(true)}
@@ -66,6 +67,7 @@ const CreatePrivateClass = ({ navigation }) => {
         <DropDown
           label={"Education Levels"}
           mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
           style={styles.input}
           visible={showEducationLevelDropdown}
           showDropDown={() => setShowEducationLevelDropdown(true)}
@@ -77,6 +79,7 @@ const CreatePrivateClass = ({ navigation }) => {
         <DropDown
           label={"Subject"}
           mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
           style={styles.input}
           visible={showSubjectDropdown}
           showDropDown={() => setShowSubjectDropdown(true)}

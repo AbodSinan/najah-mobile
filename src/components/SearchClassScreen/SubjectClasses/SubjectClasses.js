@@ -13,7 +13,7 @@ const SubjectClasses = ({ navigation, route }) => {
   );
 
   const handleClassPress = (classId) => {
-    navigation.navigate("ClassInfo", { classId });
+    navigation.navigate("Class Info", { classId });
   };
 
   return (

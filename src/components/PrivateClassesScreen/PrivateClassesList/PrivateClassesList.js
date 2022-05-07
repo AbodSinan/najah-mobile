@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { Text, Card, Title, Paragraph } from "react-native-paper";
 
 import AddPrivateClassButton from "./AddPrivateClassButton";
+import NotFoundMessage from "../../NotFoundMessage";
 
 import { getPrivateClasses } from "../../../sagas/selectors";
 import styles from "../../../styles";
@@ -12,7 +13,7 @@ const PrivateClassesList = ({ navigation }) => {
   const privateClasses = useSelector(getPrivateClasses);
 
   const handleAddClass = () => {
-    navigation.navigate("CreatePrivateClass");
+    navigation.navigate("Create Private Class");
   };
 
   return (
@@ -20,10 +21,11 @@ const PrivateClassesList = ({ navigation }) => {
       <AddPrivateClassButton onPress={handleAddClass} />
       <View style={styles.container}>
         {privateClasses.length === 0 && (
-          <Text>
-            There are no classes available for this subject, be the first to
-            create one!
-          </Text>
+          <NotFoundMessage
+            title={
+              "There are no classes available for this subject, be the first to create one!"
+            }
+          />
         )}
         {privateClasses.map((cls) => (
           <Card onPress={() => handleClassPress(cls.id)} style={styles.card}>

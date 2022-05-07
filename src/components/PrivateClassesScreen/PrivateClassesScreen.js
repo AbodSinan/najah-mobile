@@ -16,8 +16,14 @@ const PrivateClassesScreen = ({ navigation }) => {
         },
       }}
     >
-      <Stack.Screen name="PrivateClassesList" component={PrivateClassesList} />
-      <Stack.Screen name="CreatePrivateClass" component={CreatePrivateClass} />
+      <Stack.Screen
+        name="Private Classes List"
+        component={PrivateClassesList}
+      />
+      <Stack.Screen
+        name="Create Private Class"
+        component={CreatePrivateClass}
+      />
     </Stack.Navigator>
   );
 };
