@@ -38,6 +38,18 @@ export const prepareCreateClassRequest = (params) => {
   };
 };
 
+export const prepareCreatePrivateClassRequest = (params) => {
+  const { subject, educationLevel, rate, description } = params;
+  return {
+    body: {
+      subject,
+      educationLevel,
+      rate,
+      description,
+    },
+  };
+};
+
 export const prepareCreateClassBookingRequest = (params) => {
   const { classId } = params;
 

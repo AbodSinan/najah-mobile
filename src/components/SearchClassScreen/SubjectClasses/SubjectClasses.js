@@ -19,7 +19,7 @@ const SubjectClasses = ({ navigation, route }) => {
   return (
     <ScrollView style={styles.container}>
       {classes.map((cls) => (
-        <Card onPress={() => handleClassPress(cls.id)}>
+        <Card onPress={() => handleClassPress(cls.id)} style={styles.card}>
           <Card.Title title={subject.name} />
           <Card.Content>
             <Title>By {cls.tutor.firstName}</Title>

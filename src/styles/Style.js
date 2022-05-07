@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "./theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +17,20 @@ const styles = StyleSheet.create({
   },
   actionbutton: {
     marginBottom: 20,
+  },
+  card: {
+    borderRadius: 10,
+    backgroundColor: theme.colors.card,
+    borderWidth: 2,
+    borderColor: theme.colors.border,
+  },
+  fab: {
+    backgroundColor: theme.colors.primary,
+    zIndex: 100,
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 });
 

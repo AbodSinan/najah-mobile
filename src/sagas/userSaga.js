@@ -12,6 +12,7 @@ function* handleLogin() {
   yield put(api.getUserClasses.createAction());
   yield put(api.getEducationLevels.createAction());
   yield put(api.getSubjectCategories.createAction());
+  yield put(api.getPrivateClasses.createAction());
 }
 
 function* watchLogin() {

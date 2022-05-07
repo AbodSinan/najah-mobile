@@ -10,6 +10,12 @@ export const prepareClassesResponse = ({ data, state }) => ({
   },
 });
 
+export const preparePrivateClassesResponse = ({ data, state }) => ({
+  response: {
+    privateClasses: [...data.response],
+  },
+});
+
 export const prepareSubjectResponse = ({ data, state }) => ({
   response: {
     subjects: [...data.response],

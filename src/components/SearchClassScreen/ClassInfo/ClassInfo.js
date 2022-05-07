@@ -13,10 +13,6 @@ const ClassInfo = ({ navigation, route }) => {
   const [isModalShown, setIsModalShown] = useState(false);
   const cls = useSelector((state) => selectClass(state, classId));
 
-  const tutorEducationLevel = useSelector((state) =>
-    selectEducationLevel(state, cls.tutor.educationLevel)
-  );
-
   const handleConfirmPress = () => {
     dispatcher(api.createClassBooking.createAction({ classId }));
   };
@@ -58,7 +54,7 @@ const ClassInfo = ({ navigation, route }) => {
           />
           <List.Item
             title={"Education Level"}
-            description={tutorEducationLevel.name}
+            description={cls.tutor.EducationLevel}
           />
           <List.Item
             title={"Description"}

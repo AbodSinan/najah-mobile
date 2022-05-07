@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
@@ -9,8 +10,10 @@ import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
 import ProfileScreen from "../ProfileScreen";
 import SearchClassScreen from "../SearchClassScreen";
+import PrivateClassesScreen from "../PrivateClassesScreen";
 
 import { getUserToken } from "../../sagas/selectors";
+import { theme } from "../../styles/theme";
 import styles from "../../styles";
 
 const Stack = createStackNavigator();
@@ -23,11 +26,49 @@ const MainScreen = ({ navigator }) => {
       {isSignedIn ? (
         <Tab.Navigator
           initialRouteName="Profile"
-          screenOptions={{ style: { ...styles.container } }}
+          screenOptions={{
+            style: { ...styles.container },
+            headerStyle: {
+              backgroundColor: "red",
+            },
+          }}
         >
-          <Tab.Screen name="Profile" component={ProfileScreen} />
-          <Tab.Screen name="Classes" component={ClassesScreen} />
-          <Tab.Screen name="SearchClass" component={SearchClassScreen} />
+          <Tab.Screen
+            name="Classes"
+            component={ClassesScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="list-ul" color={color} size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="SearchClass"
+            component={SearchClassScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="graduation-cap" color={color} size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="PrivateClasses"
+            component={PrivateClassesScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="user-friends" color={color} size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Icon name="home" color={color} size={26} />
+              ),
+            }}
+          />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

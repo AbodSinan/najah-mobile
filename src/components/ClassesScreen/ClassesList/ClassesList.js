@@ -25,7 +25,7 @@ const ClassesList = ({ navigation }) => {
           </Text>
         )}
         {classes.map((cls) => (
-          <Card onPress={() => handleClassPress(cls.id)}>
+          <Card onPress={() => handleClassPress(cls.id)} style={styles.card}>
             <Card.Title title={cls.subject} />
             <Card.Content>
               <Title>

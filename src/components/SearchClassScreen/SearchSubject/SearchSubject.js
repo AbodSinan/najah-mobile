@@ -65,7 +65,7 @@ const SearchSubject = ({ navigation }) => {
         />
       </View>
       {filteredSubjects.map((subject) => (
-        <Card onPress={() => handleSubjectPress(subject)}>
+        <Card onPress={() => handleSubjectPress(subject)} style={styles.card}>
           <Card.Title title={subject.name} />
           <Card.Content>
             <Paragraph>{subject.description}</Paragraph>

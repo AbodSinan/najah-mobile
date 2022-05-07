@@ -7,6 +7,7 @@ const defaultState = Object.freeze({
   subjectCategories: [],
   educationLevels: [],
   classes: [],
+  privateClasses: [],
   subjects: [],
   status: {},
   errors: [],
