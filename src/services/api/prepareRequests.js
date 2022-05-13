@@ -67,6 +67,14 @@ export const prepareCreateSubjectRequest = (params) => {
   };
 };
 
+export const prepareCreateTutorOfferRequest = (params) => {
+  return {
+    body: {
+      ...params,
+    },
+  };
+};
+
 export const prepareUpdateProfilePicture = (params) => {
   return {
     body: {

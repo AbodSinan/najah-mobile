@@ -1,19 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { View } from "react-native";
-import { Text, Card, Title, Paragraph } from "react-native-paper";
 
 import AddPrivateClassButton from "./AddPrivateClassButton";
 import NotFoundMessage from "../../NotFoundMessage";
 
 import { getPrivateClasses } from "../../../sagas/selectors";
 import styles from "../../../styles";
+import ClassCard from "../../ClassCard/ClassCard";
 
 const PrivateClassesList = ({ navigation }) => {
   const privateClasses = useSelector(getPrivateClasses);
 
   const handleAddClass = () => {
     navigation.navigate("Create Private Class");
+  };
+
+  const handlePrivateClassPress = (classId) => {
+    navigation.navigate("Class Info", { classId, isPrivate: true });
   };
 
   return (
@@ -28,15 +32,11 @@ const PrivateClassesList = ({ navigation }) => {
           />
         )}
         {privateClasses.map((cls) => (
-          <Card onPress={() => handleClassPress(cls.id)} style={styles.card}>
-            <Card.Title title={cls.subject} />
-            <Card.Content>
-              <Title>
-                {cls.subject} by {cls.tutor.firstName} {cls.tutor.lastName}
-              </Title>
-              <Paragraph>{cls.description}</Paragraph>
-            </Card.Content>
-          </Card>
+          <ClassCard
+            cls={cls}
+            handleCardPress={handlePrivateClassPress}
+            isPrivate
+          />
         ))}
       </View>
     </View>

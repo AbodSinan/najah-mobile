@@ -4,6 +4,7 @@ import { Card, Title, Paragraph } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { selectSubjectClasses } from "../../../sagas/selectors";
 import styles from "../../../styles";
+import ClassCard from "../../ClassCard";
 
 const SubjectClasses = ({ navigation, route }) => {
   const { subject } = route.params || null;
@@ -19,13 +20,10 @@ const SubjectClasses = ({ navigation, route }) => {
   return (
     <ScrollView style={styles.container}>
       {classes.map((cls) => (
-        <Card onPress={() => handleClassPress(cls.id)} style={styles.card}>
-          <Card.Title title={subject.name} />
-          <Card.Content>
-            <Title>By {cls.tutor.firstName}</Title>
-            <Paragraph>{cls.description}</Paragraph>
-          </Card.Content>
-        </Card>
+        <ClassCard
+          onCardPress={() => handleClassPress(cls.id)}
+          style={styles.card}
+        />
       ))}
     </ScrollView>
   );

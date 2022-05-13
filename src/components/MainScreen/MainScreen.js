@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import ClassesScreen from "../ClassesScreen";
+import MyClassesScreen from "../MyClassesScreen";
 import UserTypeScreen from "../UserTypeScreen";
 import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
@@ -35,7 +35,7 @@ const MainScreen = ({ navigator }) => {
         >
           <Tab.Screen
             name="My Classes"
-            component={ClassesScreen}
+            component={MyClassesScreen}
             options={{
               tabBarIcon: ({ color }) => (
                 <Icon name="list-ul" color={color} size={26} />

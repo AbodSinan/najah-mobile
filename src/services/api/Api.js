@@ -76,6 +76,11 @@ class Api extends baseApi {
     method: "POST",
     prepareRequest: prepareRequestUtils.prepareCreateClassBookingRequest,
   });
+  createTutorOffer = new Endpoint({
+    endpoint: "private/tutor-offers/",
+    method: "POST",
+    prepareRequest: prepareRequestUtils.prepareCreateTutorOfferRequest,
+  });
   subjectClasses = new Endpoint({ endpoint: "booking/subject-classes/%s" });
 }
 
