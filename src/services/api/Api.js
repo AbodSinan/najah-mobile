@@ -15,7 +15,6 @@ class Api extends baseApi {
     endpoint: "auth/register",
     method: "POST",
     reducer: "user",
-    prepareRequest: prepareRequestUtils.prepareRegisterRequest,
   });
   login = new Endpoint({
     endpoint: "auth/login",

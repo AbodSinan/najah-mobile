@@ -8,13 +8,6 @@ export const defaultPrepareRequest = (params) => {
   });
 };
 
-export const prepareRegisterRequest = (params) =>
-  toSnakeKeys({
-    body: {
-      ...params,
-    },
-  });
-
 export const prepareCreateClassRequest = (params) => {
   const {
     noOfTimes,
