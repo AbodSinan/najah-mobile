@@ -15,6 +15,7 @@ function* handleRehydrate() {
   yield put(api.getEducationLevels.createAction());
   yield put(api.getSubjectCategories.createAction());
   yield put(api.getPrivateClasses.createAction());
+  yield put(api.getUserTutorOffers.createAction());
 }
 
 function* watchRehydrate() {

@@ -22,6 +22,12 @@ export const prepareUserPrivateClassesResponse = ({ data, state }) => ({
   },
 });
 
+export const prepareUserTutorOffers = ({ data, state }) => ({
+  response: {
+    userTutorOffers: [...data.response],
+  },
+});
+
 export const prepareSubjectResponse = ({ data, state }) => ({
   response: {
     subjects: [...data.response],
