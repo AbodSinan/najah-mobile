@@ -43,6 +43,10 @@ class Api extends baseApi {
     endpoint: "private/student-private-classes",
     prepareResponse: prepareResponseUtils.prepareUserPrivateClassesResponse,
   });
+  getTutorPrivateOffers = new Endpoint({
+    endpoint: "private/tutor-offers",
+    prepareResponse: prepareResponseUtils.
+  })
   createClass = new Endpoint({
     endpoint: "booking/subject-classes/%s",
     method: "POST",
