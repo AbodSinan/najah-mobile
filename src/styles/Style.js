@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
   actionbutton: {
     marginBottom: 20,
   },
+  iconButton: {
+    width: 50,
+    height: 50,
+  },
   card: {
     borderRadius: 10,
     backgroundColor: theme.colors.card,

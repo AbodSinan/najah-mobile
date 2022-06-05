@@ -31,6 +31,7 @@ const handleTransform = ({ action, state, endpoint }) => {
       const transformedResponse = toCamelCaseKeys(
         endpoint.prepareResponse({
           data: action,
+          state,
           endpointName,
           requestParams,
         })

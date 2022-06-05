@@ -50,13 +50,16 @@ export const requestStatus = (currentStatus) =>
     : apiStatusEnum.REQUESTED;
 
 /* Extract label:value from a list of objects, for listing */
-export const extractLabelList = (list, noNull = false) => {
+export const extractLabelList = (list, addLabel = null, noNull = false) => {
   const newList = list.map((item) => ({
     label: item.name,
     value: item.id,
   }));
   if (!noNull) {
     newList.push({ label: "Any", value: null });
+  }
+  if (addLabel) {
+    newList.push({ label: addLabel, value: "add" });
   }
 
   return newList;

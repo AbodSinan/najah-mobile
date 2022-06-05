@@ -34,6 +34,15 @@ export const prepareSubjectResponse = ({ data, state }) => ({
   },
 });
 
+export const prepareCreateSubjectResponse = ({ data, state }) => {
+  return {
+    response: {
+      subjects: [data.response, ...state.subjects],
+      newSubject: { ...data.response },
+    },
+  };
+};
+
 export const prepareEducationLevelsResponse = ({ data, state }) => ({
   response: {
     educationLevels: [...data.response],

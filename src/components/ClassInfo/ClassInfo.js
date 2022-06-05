@@ -15,7 +15,6 @@ const ClassInfo = ({ navigation, route }) => {
   const cls = useSelector((state) =>
     selectClass(state, classId, isPrivate, ownClass)
   );
-  console.log(cls);
   const createOfferStatus = useSelector(getCreateOfferStatus);
 
   const handleConfirmPress = () => {

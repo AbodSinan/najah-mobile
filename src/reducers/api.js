@@ -11,6 +11,7 @@ const defaultState = Object.freeze({
   classes: [],
   privateClasses: [],
   subjects: [],
+  newSubject: {},
   status: {},
   errors: [],
 });
@@ -30,6 +31,7 @@ export default function apiReducer(state = defaultState, action) {
             "educationLevels",
             "classes",
             "subjects",
+            "newSubject",
           ],
           state,
           incoming

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Card, Paragraph } from "react-native-paper";
+import { Card, FAB, Paragraph } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import {
   getEducationLevels,
@@ -34,12 +34,21 @@ const SearchSubject = ({ navigation }) => {
     educationLevelIds: selectedEducationLevel ? [selectedEducationLevel] : null,
   });
 
+  const handleCreateClassPress = () => {
+    navigation.navigate("Create Class");
+  };
+
   const handleSubjectPress = (subject) => {
     navigation.navigate("Subject Classes", { subject });
   };
 
   return (
     <ScrollView style={styles.container}>
+      <FAB
+        style={styles.fab}
+        label="Create Class"
+        onPress={handleCreateClassPress}
+      />
       <View style={localStyles.filtersContainer}>
         <DropDown
           label={"Education Levels"}

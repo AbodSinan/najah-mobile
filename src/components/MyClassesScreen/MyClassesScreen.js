@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ClassesList from "./ClassesList";
-import CreateClass from "./CreateClass";
+import CreateClass from "../CreateClass";
 import ClassInfo from "../ClassInfo";
 
 import { theme } from "../../styles/theme";

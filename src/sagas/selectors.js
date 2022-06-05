@@ -9,11 +9,14 @@ export const getUserClasses = (state) => state.api.userClasses;
 export const getUserPrivateClasses = (state) => state.api.userPrivateClasses;
 export const getPrivateClasses = (state) => state.api.privateClasses;
 export const getSubjects = (state) => state.api.subjects;
+export const getNewSubject = (state) => state.api.newSubjects;
 export const getEducationLevels = (state) => state.api.educationLevels;
 export const getSubjectCategories = (state) => state.api.subjectCategories;
 
 export const getCreateOfferStatus = (state) =>
   state.api.status.createTutorOffer;
+
+export const getCreateSubjectStatus = (state) => state.api.status.createSubject;
 
 export const selectEducationLevel = (state, educationLevelId) =>
   state.api.educationLevels[educationLevelId];

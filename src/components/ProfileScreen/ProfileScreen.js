@@ -9,7 +9,6 @@ import * as selectors from "../../sagas/selectors";
 import ProfileImage from "./ProfileImage";
 import styles from "../../styles";
 import { theme } from "../../styles/theme";
-console.log(theme.colors);
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();

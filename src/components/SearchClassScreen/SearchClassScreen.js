@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SubjectClasses from "./SubjectClasses/";
 import SearchSubject from "./SearchSubject";
 import ClassInfo from "../ClassInfo";
+import CreateClass from "../CreateClass";
 
 import { theme } from "../../styles/theme";
 import styles from "../../styles";
@@ -21,6 +22,7 @@ const ClassesScreen = ({ navigator }) => {
     >
       <Stack.Screen name="Search Subject" component={SearchSubject} />
       <Stack.Screen name="Subject Classes" component={SubjectClasses} />
+      <Stack.Screen name="Create Class" component={CreateClass} />
       <Stack.Screen name="Class Info" component={ClassInfo} />
     </Stack.Navigator>
   );

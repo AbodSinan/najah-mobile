@@ -8,12 +8,14 @@ import {
   getSubjects,
   getSubjectCategories,
   getEducationLevels,
-} from "../../../sagas/selectors";
-import { filterSubjects } from "../../../utils/commonUtils";
-import api from "../../../services/api/Api";
-import frequencyEnum from "../../../enums/frequencyEnum";
-import { extractLabelList } from "../../../utils/commonUtils";
-import styles from "../../../styles";
+  getNewSubject,
+} from "../../sagas/selectors";
+import { filterSubjects } from "../../utils/commonUtils";
+import api from "../../services/api/Api";
+import frequencyEnum from "../../enums/frequencyEnum";
+import { extractLabelList } from "../../utils/commonUtils";
+import styles from "../../styles";
+import AddSubjectModal from "../AddSubjectModal/AddSubjectModal";
 
 const CreateClass = ({ navigator }) => {
   const dispatcher = useDispatch();
@@ -25,6 +27,7 @@ const CreateClass = ({ navigator }) => {
   const subjects = useSelector(getSubjects);
   const subjectCategories = useSelector(getSubjectCategories);
   const educationLevels = useSelector(getEducationLevels);
+  const newSubject = useSelector(getNewSubject);
 
   const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
   const [showFrequencyDropdown, setShowFrequencyDropdown] = useState(false);
@@ -48,6 +51,15 @@ const CreateClass = ({ navigator }) => {
   const [frequency, setFrequency] = useState(frequencyEnum.MONTHLY);
   const [description, setDescription] = useState("");
   const [ratePerHour, setRatePerHour] = useState("");
+  const [isAddSubjectModalShown, setIsAddSubjectModalShown] = useState(false);
+
+  const handleSelectSubject = (value) => {
+    if (value === "add") {
+      setIsAddSubjectModalShown(true);
+    }
+
+    setSelectedSubject(value);
+  };
 
   const handleSubmit = () => {
     dispatcher(
@@ -64,7 +76,11 @@ const CreateClass = ({ navigator }) => {
     );
   };
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
+      <AddSubjectModal
+        isShown={isAddSubjectModalShown}
+        onDismiss={() => setIsAddSubjectModalShown(false)}
+      />
       <DropDown
         label={"Subject Category"}
         mode={"outlined"}
@@ -98,8 +114,8 @@ const CreateClass = ({ navigator }) => {
         showDropDown={() => setShowSubjectDropdown(true)}
         onDismiss={() => setShowSubjectDropdown(false)}
         value={selectedSubject}
-        setValue={setSelectedSubject}
-        list={extractLabelList(filteredSubjects)}
+        setValue={handleSelectSubject}
+        list={extractLabelList(filteredSubjects, "New Subject")}
       />
       <DropDown
         label={"Frequency"}
