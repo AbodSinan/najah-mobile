@@ -76,6 +76,7 @@ class Api extends baseApi {
     prepareResponse: prepareResponseUtils.prepareSubjectCategoryResponse,
   });
   classBookings = new Endpoint({ endpoint: "booking/class-bookings/%s" });
+  /*TODO: Check if default prepareRequest works */
   createClassBooking = new Endpoint({
     endpoint: "booking/class-bookings/%s",
     method: "POST",
@@ -87,6 +88,11 @@ class Api extends baseApi {
     prepareRequest: prepareRequestUtils.prepareCreateTutorOfferRequest,
   });
   subjectClasses = new Endpoint({ endpoint: "booking/subject-classes/%s" });
+  selectTutor = new Endpoint({
+    endpoint: "private/select-tutor/",
+    method: "POST",
+    prepareRequest: prepareRequestUtils.prepareSelectTutorRequest,
+  });
 }
 
 export const apiMapping = {

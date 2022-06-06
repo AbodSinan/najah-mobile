@@ -3,6 +3,8 @@ import { ScrollView } from "react-native";
 import { Button, List, Portal, Dialog, Paragraph } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 
+import ProfileCard from "../ProfileCard/ProfileCard";
+
 import api from "../../services/api/Api";
 import { getCreateOfferStatus, selectClass } from "../../sagas/selectors";
 import styles from "../../styles";
@@ -17,6 +19,7 @@ const ClassInfo = ({ navigation, route }) => {
   );
   const createOfferStatus = useSelector(getCreateOfferStatus);
 
+  /*TODO: Create a component to confirm action that takes onConfirm and action */
   const handleConfirmPress = () => {
     if (ownClass) {
       if (isPrivate) {
@@ -30,6 +33,12 @@ const ClassInfo = ({ navigation, route }) => {
     } else {
       dispatcher(api.createClassBooking.createAction({ classId }));
     }
+  };
+
+  const handleSelectTutor = (tutorId) => {
+    dispatcher(
+      api.selectTutor.createAction({ privateClassId: classId, tutorId })
+    );
   };
 
   useEffect(() => {
@@ -93,10 +102,10 @@ const ClassInfo = ({ navigation, route }) => {
         )}
         {isPrivate && cls.tutorOffers && (
           <List.Accordion title={"Tutor Offers"} id={3}>
-            {cls.tutorOffers.map((tutor) => (
-              <List.Item
-                title={"Tutor name"}
-                description={`${tutor.fullName}`}
+            {cls.tutorOffers.map((offer) => (
+              <ProfileCard
+                profile={offer.tutor}
+                onSelect={() => handleSelectTutor(offer.tutor.id)}
               />
             ))}
           </List.Accordion>

@@ -75,3 +75,9 @@ export const prepareUpdateProfilePicture = (params) => {
     },
   };
 };
+
+export const prepareSelectTutorRequest = (params) => ({
+  body: {
+    ...params,
+  },
+});

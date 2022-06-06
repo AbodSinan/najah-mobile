@@ -92,12 +92,14 @@ const CreatePrivateClass = ({ navigation }) => {
           style={styles.input}
           keyboardType="decimal-pad"
           placeholder="Rate"
+          label="Rate"
           value={rate}
           onChangeText={(text) => setRate(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Description"
+          label="Description"
           value={description}
           onChangeText={(text) => setDescription(text)}
           multiline

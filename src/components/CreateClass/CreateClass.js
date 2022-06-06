@@ -133,6 +133,7 @@ const CreateClass = ({ navigator }) => {
         style={styles.input}
         keyboardType="decimal-pad"
         placeholder="Rate per hour"
+        label="Rate per hour"
         value={ratePerHour}
         onChangeText={(text) => setRatePerHour(text)}
       />
@@ -140,6 +141,7 @@ const CreateClass = ({ navigator }) => {
         style={styles.input}
         keyboardType="decimal-pad"
         placeholder="Number of classes"
+        label="Number of classes"
         value={noOfTimes}
         onChangeText={(text) => setNoOfTimes(text)}
       />
@@ -147,12 +149,14 @@ const CreateClass = ({ navigator }) => {
         style={styles.input}
         keyboardType="decimal-pad"
         placeholder="Class duration (Hours)"
+        label="Class duration (Hours)"
         value={duration}
         onChangeText={(text) => setDuration(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Description"
+        label="Description"
         value={description}
         onChangeText={(text) => setDescription(text)}
         multiline
