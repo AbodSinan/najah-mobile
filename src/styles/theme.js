@@ -6,5 +6,9 @@ import merge from "deepmerge";
 const combinedDefaultTheme = merge(NavigationDefaultTheme, PaperDefaultTheme);
 export const theme = {
   ...combinedDefaultTheme,
+  colors: {
+    ...combinedDefaultTheme.colors,
+    contrast: "#ffffff",
+  },
   roundness: 5,
 };

@@ -104,7 +104,7 @@ const localStyles = StyleSheet.create({
   buttonRow: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
   topButton: {
     flex: 1,

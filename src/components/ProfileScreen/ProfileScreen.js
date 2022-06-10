@@ -12,16 +12,8 @@ import { theme } from "../../styles/theme";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const {
-    firstName,
-    lastName,
-    age,
-    image,
-    description,
-    gender,
-    educationLevel,
-    email,
-  } = useSelector(selectors.getUserInfo);
+  const { fullName, image, description, gender, educationLevel, email } =
+    useSelector(selectors.getUserInfo);
 
   const handleLogout = () => {
     dispatch(userActions.logout());
@@ -36,20 +28,34 @@ const ProfileScreen = () => {
             <List.Subheader style={localStyles.profileHeader}>
               User info
             </List.Subheader>
-            <List.Item title={`First name: ${firstName}`} />
+            <List.Item
+              title={`Full Name`}
+              description={fullName}
+              left={(props) => <List.Icon {...props} icon="account" />}
+            />
             <Divider />
-            <List.Item title={`Last name: ${lastName}`} />
+            <List.Item
+              title={`Email`}
+              description={email}
+              left={(props) => <List.Icon {...props} icon="email" />}
+            />
             <Divider />
-            <List.Item title={`Email: ${email}`} />
-            <Divider />
-            <List.Item title={`Gender: ${gender}`} />
+            <List.Item
+              title={`Gender`}
+              description={gender}
+              left={(props) => <List.Icon {...props} icon="gender-female" />}
+            />
             <Divider />
             <List.Subheader style={localStyles.profileHeader}>
               Description
             </List.Subheader>
-            <List.Item title={`Education Level: ${educationLevel}`} />
+            <List.Item
+              title={`Education Level`}
+              description={educationLevel}
+              left={(props) => <List.Icon {...props} icon="school" />}
+            />
             <Divider />
-            <List.Item title={description} />
+            <List.Item title={`Biography`} description={description} />
           </List.Section>
         </Surface>
       </ScrollView>

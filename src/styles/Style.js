@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   iconButton: {
     width: 50,
     height: 50,
+    margin: 20,
   },
   card: {
     borderRadius: 10,
