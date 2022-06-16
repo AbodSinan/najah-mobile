@@ -12,8 +12,6 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
 
   const userType = useSelector(selectors.getUserType);
 
@@ -61,20 +59,6 @@ const RegisterScreen = ({ navigation }) => {
         textContentType="password"
         value={password2}
         onChangeText={(text) => setPassword2(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter first name"
-        textContentType="name"
-        value={firstName}
-        onChangeText={(text) => setFirstName(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter last name"
-        textContentType="familyname"
-        value={lastName}
-        onChangeText={(text) => setLastName(text)}
       />
       <Button
         onPress={onHandleRegister}

@@ -21,6 +21,7 @@ const SubjectClasses = ({ navigation, route }) => {
     <ScrollView style={styles.container}>
       {classes.map((cls) => (
         <ClassCard
+          cls={cls}
           onCardPress={() => handleClassPress(cls.id)}
           style={styles.card}
         />

@@ -15,7 +15,9 @@ export const getSubjectCategories = (state) => state.api.subjectCategories;
 
 export const getCreateOfferStatus = (state) =>
   state.api.status.createTutorOffer;
-
+export const getCreateClassStatus = (state) => state.api.status.createClass;
+export const getCreateClassBookingStatus = (state) =>
+  state.api.status.createClassBooking;
 export const getCreateSubjectStatus = (state) => state.api.status.createSubject;
 
 export const selectEducationLevel = (state, educationLevelId) =>

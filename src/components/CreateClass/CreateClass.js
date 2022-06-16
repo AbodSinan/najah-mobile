@@ -9,6 +9,7 @@ import {
   getSubjectCategories,
   getEducationLevels,
   getNewSubject,
+  getCreateClassStatus,
 } from "../../sagas/selectors";
 import { filterSubjects } from "../../utils/commonUtils";
 import api from "../../services/api/Api";
@@ -75,6 +76,7 @@ const CreateClass = ({ navigator }) => {
       })
     );
   };
+
   return (
     <ScrollView style={styles.container}>
       <AddSubjectModal

@@ -6,7 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 import api from "../../services/api/Api";
-import { getCreateOfferStatus, selectClass } from "../../sagas/selectors";
+import {
+  getCreateClassBookingStatus,
+  getCreateOfferStatus,
+  selectClass,
+} from "../../sagas/selectors";
 import styles from "../../styles";
 import apiStatusEnum from "../../enums/apiStatusEnum";
 
@@ -14,10 +18,13 @@ const ClassInfo = ({ navigation, route }) => {
   const dispatcher = useDispatch();
   const { classId, isPrivate, ownClass } = route.params;
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const cls = useSelector((state) =>
     selectClass(state, classId, isPrivate, ownClass)
   );
   const createOfferStatus = useSelector(getCreateOfferStatus);
+  const createClassBookingStatus = useSelector(getCreateClassBookingStatus);
 
   /*TODO: Create a component to confirm action that takes onConfirm and action */
   const handleConfirmPress = () => {
@@ -47,20 +54,40 @@ const ClassInfo = ({ navigation, route }) => {
     }
   }, [createOfferStatus]);
 
+  useEffect(() => {
+    if (
+      createClassBookingStatus &&
+      createClassBookingStatus === apiStatusEnum.AWAITING
+    ) {
+      setIsLoading(true);
+    }
+    if (
+      createClassBookingStatus &&
+      createClassBookingStatus === apiStatusEnum.SUCCESS
+    ) {
+      setIsLoading(false);
+      setIsModalShown(false);
+    }
+  }, [createClassBookingStatus]);
+
   return (
     <>
       <Portal>
         <Dialog visible={isModalShown} onDismiss={() => setIsModalShown(false)}>
           <Dialog.Title>Confim Class</Dialog.Title>
           <Dialog.Content>
-            <Paragraph>
-              Are you sure you want to{" "}
-              {ownClass
-                ? "Delete this class?"
-                : isPrivate
-                ? "tutor this class?"
-                : "join this class?"}
-            </Paragraph>
+            {!isLoading ? (
+              <Paragraph>
+                Are you sure you want to{" "}
+                {ownClass
+                  ? "Delete this class?"
+                  : isPrivate
+                  ? "tutor this class?"
+                  : "join this class?"}
+              </Paragraph>
+            ) : (
+              <ActivityIndicator size="large" />
+            )}
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={handleConfirmPress}>Confirm</Button>
