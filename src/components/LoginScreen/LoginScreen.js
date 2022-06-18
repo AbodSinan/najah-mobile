@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
       <Button mode="contained" onPress={onHandleLogin}>
         Login
       </Button>
-      <Button mode="text" onPress={() => navigation.navigate("UserType")}>
+      <Button mode="text" onPress={() => navigation.navigate("Create Profile")}>
         Register
       </Button>
     </View>

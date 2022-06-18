@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
-import View from "react-native";
+import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import { useSelector } from "react-redux";
 
+import { extractLabelList } from "../../utils/commonUtils";
+
 import { getEducationLevels } from "../../sagas/selectors";
 import styles from "../../styles";
 
-const ProfileInfo = ({ navigation }) => {
+const EditProfile = ({ navigation }) => {
   const educationLevels = useSelector(getEducationLevels);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -57,4 +59,4 @@ const ProfileInfo = ({ navigation }) => {
   );
 };
 
-export default ProfileInfo;
+export default EditProfile;

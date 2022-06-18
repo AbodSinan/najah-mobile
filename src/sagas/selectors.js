@@ -2,8 +2,11 @@ export const getUserType = (state) => state.user.userType;
 export const getUserToken = (state) => state.user.token;
 export const getUserInfo = (state) => state.user;
 
+/* TODO: Can probably create a module to make this more efficient */
 export const getLoginErrors = (state) =>
   state.user.errors.filter((error) => error.endpointName === "login");
+export const getRegisterErrors = (state) =>
+  state.user.errors.filter((error) => error.endpointName === "register");
 
 export const getUserClasses = (state) => state.api.userClasses;
 export const getUserPrivateClasses = (state) => state.api.userPrivateClasses;
@@ -19,6 +22,7 @@ export const getCreateClassStatus = (state) => state.api.status.createClass;
 export const getCreateClassBookingStatus = (state) =>
   state.api.status.createClassBooking;
 export const getCreateSubjectStatus = (state) => state.api.status.createSubject;
+export const getRegisterStatus = (state) => state.user.status.register;
 
 export const selectEducationLevel = (state, educationLevelId) =>
   state.api.educationLevels[educationLevelId];

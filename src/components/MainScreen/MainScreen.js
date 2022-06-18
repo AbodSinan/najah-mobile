@@ -5,7 +5,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import MyClassesScreen from "../MyClassesScreen";
-import UserTypeScreen from "../UserTypeScreen";
 import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
 import ProfileScreen from "../ProfileScreen";
@@ -13,7 +12,8 @@ import SearchClassScreen from "../SearchClassScreen";
 import PrivateClassesScreen from "../PrivateClassesScreen";
 
 import { getUserToken } from "../../sagas/selectors";
-import { theme } from "../../styles/theme";
+import EditProfile from "../EditProfile/EditProfile";
+
 import styles from "../../styles";
 
 const Stack = createStackNavigator();
@@ -73,8 +73,8 @@ const MainScreen = ({ navigator }) => {
       ) : (
         <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="UserType" component={UserTypeScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="Create Profile" component={EditProfile} />
         </Stack.Navigator>
       )}
     </>

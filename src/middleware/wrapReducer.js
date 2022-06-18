@@ -60,7 +60,7 @@ const handleTransform = ({ action, state, endpoint }) => {
 
       return {
         ...state,
-        errors,
+        errors: toCamelCaseKeys(errors),
         status: {
           ...state.status,
           [endpointName]: apiStatusEnum.ERROR,
