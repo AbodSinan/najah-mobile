@@ -22,7 +22,7 @@ const handleTransform = ({ action, state, endpoint }) => {
         errors: removeError(state.errors, endpointName),
         status: {
           ...state.status,
-          [endpointName]: requestStatus(state.status[endpointName]),
+          [endpointName + "Status"]: requestStatus(state.status[endpointName]),
         },
       };
     }

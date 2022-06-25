@@ -1,27 +1,53 @@
 import React, { useState } from "react";
 
-import { View } from "react-native";
-import { TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { extractLabelList } from "../../utils/commonUtils";
 
-import { getEducationLevels } from "../../sagas/selectors";
+import {
+  getEducationLevels,
+  getUserInfo,
+  getUserStatus,
+} from "../../sagas/selectors";
+import api from "../../services/api/Api";
 import styles from "../../styles";
+import LoadingContainer from "../LoadingContainer/LoadingContainer";
 
 const EditProfile = ({ navigation }) => {
+  const dispatcher = useDispatch();
+
   const educationLevels = useSelector(getEducationLevels);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
+  const { currentFirstName, currentLastName, currentBio } =
+    useSelector(getUserInfo);
+  const [firstName, setFirstName] = useState(currentFirstName);
+  const [lastName, setLastName] = useState(currentLastName);
+  const [bio, setBio] = useState(currentBio);
 
   const [selectedEducationLevel, setSelectedEducationLevel] = useState(null);
   const [showEducationLevelDropdown, setShowEducationLevelDropdown] =
     useState(false);
 
+  const { editProfileStatus } = useSelector(getUserStatus);
+
+  const handleSubmit = () => {
+    dispatcher(
+      api.editProfile.createAction({
+        firstName,
+        lastName,
+        bio,
+        selectedEducationLevel,
+      })
+    );
+  };
+
   return (
-    <View style={styles.container}>
+    <LoadingContainer
+      apiStatus={editProfileStatus}
+      containerStyle={styles.container}
+      onSuccess={() => navigation.navigate("User Profile")}
+    >
       <TextInput
         style={styles.input}
         placeholder="Enter first name"
@@ -55,7 +81,15 @@ const EditProfile = ({ navigation }) => {
         setValue={setSelectedEducationLevel}
         list={extractLabelList(educationLevels, null, true)}
       />
-    </View>
+      <Button
+        mode="contained"
+        onPress={handleSubmit}
+        title="Submit"
+        style={styles.actionbutton}
+      >
+        Submit
+      </Button>
+    </LoadingContainer>
   );
 };
 

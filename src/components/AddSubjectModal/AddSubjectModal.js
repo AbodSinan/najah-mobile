@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getSubjectCategories,
   getEducationLevels,
-  getCreateSubjectStatus,
+  getApiStatus,
 } from "../../sagas/selectors";
 import api from "../../services/api/Api";
 import { extractLabelList } from "../../utils/commonUtils";
@@ -29,7 +29,7 @@ const AddSubjectModal = ({ isShown, onDismiss }) => {
 
   const subjectCategories = useSelector(getSubjectCategories);
   const educationLevels = useSelector(getEducationLevels);
-  const createSubjectStatus = useSelector(getCreateSubjectStatus);
+  const { createSubjectStatus } = useSelector(getApiStatus);
 
   const [selectedSubjectCategory, setSelectedSubjectCategory] = useState(null);
   const [selectedEducationLevel, setSelectedEducationLevel] = useState(null);

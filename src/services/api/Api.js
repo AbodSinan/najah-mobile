@@ -21,9 +21,14 @@ class Api extends baseApi {
     method: "POST",
     reducer: "user",
   });
-  getProfile = new Endpoint({ endpoint: "profile", reducer: "user" });
+  getProfile = new Endpoint({ endpoint: "profile/", reducer: "user" });
+  editProfile = new Endpoint({
+    endpoint: "profile/",
+    method: "PUT",
+    reducer: "user",
+  });
   updateProfilePicture = new Endpoint({
-    endpoint: "profile",
+    endpoint: "profile/",
     method: "PATCH",
     prepareRequest: prepareRequestUtils.prepareUpdateProfilePicture,
   });

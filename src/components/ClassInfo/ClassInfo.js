@@ -6,11 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 import api from "../../services/api/Api";
-import {
-  getCreateClassBookingStatus,
-  getCreateOfferStatus,
-  selectClass,
-} from "../../sagas/selectors";
+import { getApiStatus, selectClass } from "../../sagas/selectors";
 import styles from "../../styles";
 import apiStatusEnum from "../../enums/apiStatusEnum";
 
@@ -23,8 +19,8 @@ const ClassInfo = ({ navigation, route }) => {
   const cls = useSelector((state) =>
     selectClass(state, classId, isPrivate, ownClass)
   );
-  const createOfferStatus = useSelector(getCreateOfferStatus);
-  const createClassBookingStatus = useSelector(getCreateClassBookingStatus);
+  const { createOfferStatus, createClassBookingStatus } =
+    useSelector(getApiStatus);
 
   /*TODO: Create a component to confirm action that takes onConfirm and action */
   const handleConfirmPress = () => {

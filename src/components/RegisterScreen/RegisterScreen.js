@@ -11,7 +11,7 @@ import {
 } from "react-native-paper";
 
 import api from "../../services/api/Api";
-import { getRegisterStatus, getRegisterErrors } from "../../sagas/selectors";
+import { getApiStatus, getRegisterErrors } from "../../sagas/selectors";
 
 import apiStatusEnum from "../../enums/apiStatusEnum";
 import styles from "../../styles";
@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
   const [password2, setPassword2] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const registerStatus = useSelector(getRegisterStatus);
+  const { registerStatus } = useSelector(getApiStatus);
   const registerErrors = useSelector(getRegisterErrors);
   const shownError = registerErrors[0] && registerErrors[0].error;
 

@@ -1,83 +1,25 @@
 import React from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
-import { List, Button, Surface, Divider } from "react-native-paper";
+import { createStackNavigator } from "@react-navigation/stack";
+import UserProfile from "./UserProfile";
+import EditProfile from "../EditProfile/EditProfile";
 
-import { useDispatch, useSelector } from "react-redux";
-import * as userActions from "../../actions/user";
-import * as selectors from "../../sagas/selectors";
-
-import ProfileImage from "./ProfileImage";
-import styles from "../../styles";
 import { theme } from "../../styles/theme";
 
-const ProfileScreen = () => {
-  const dispatch = useDispatch();
-  const { fullName, image, description, gender, educationLevel, email } =
-    useSelector(selectors.getUserInfo);
+const Stack = createStackNavigator();
 
-  const handleLogout = () => {
-    dispatch(userActions.logout());
-  };
-
+const PrivateClassesScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <ProfileImage image={image} />
-      <ScrollView>
-        <Surface style={localStyles.profileContainer}>
-          <List.Section>
-            <List.Subheader style={localStyles.profileHeader}>
-              User info
-            </List.Subheader>
-            <List.Item
-              title={`Full Name`}
-              description={fullName}
-              left={(props) => <List.Icon {...props} icon="account" />}
-            />
-            <Divider />
-            <List.Item
-              title={`Email`}
-              description={email}
-              left={(props) => <List.Icon {...props} icon="email" />}
-            />
-            <Divider />
-            <List.Item
-              title={`Gender`}
-              description={gender}
-              left={(props) => <List.Icon {...props} icon="gender-female" />}
-            />
-            <Divider />
-            <List.Subheader style={localStyles.profileHeader}>
-              Description
-            </List.Subheader>
-            <List.Item
-              title={`Education Level`}
-              description={educationLevel}
-              left={(props) => <List.Icon {...props} icon="school" />}
-            />
-            <Divider />
-            <List.Item title={`Biography`} description={description} />
-          </List.Section>
-        </Surface>
-      </ScrollView>
-      <Button
-        style={styles.actionbutton}
-        mode="contained"
-        onPress={handleLogout}
-      >
-        Logout
-      </Button>
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+        },
+      }}
+    >
+      <Stack.Screen name="User Profile" component={UserProfile} />
+      <Stack.Screen name="Edit Profile" component={EditProfile} />
+    </Stack.Navigator>
   );
 };
 
-const localStyles = StyleSheet.create({
-  profileContainer: {
-    borderRadius: 5,
-  },
-  profileHeader: {
-    color: theme.colors.background,
-    backgroundColor: theme.colors.primary,
-  },
-});
-
-export default ProfileScreen;
+export default PrivateClassesScreen;
