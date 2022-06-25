@@ -7,7 +7,7 @@ import DropDown from "react-native-paper-dropdown";
 import {
   getEducationLevels,
   getSubjectCategories,
-  getSubjects,
+  getSubjectsWithClasses,
 } from "../../../sagas/selectors";
 import { extractLabelList, filterSubjects } from "../../../utils/commonUtils";
 
@@ -16,7 +16,7 @@ import styles from "../../../styles";
 const SearchSubject = ({ navigation }) => {
   const educationLevels = useSelector(getEducationLevels);
   const subjectCategories = useSelector(getSubjectCategories);
-  const subjects = useSelector(getSubjects);
+  const subjects = useSelector(getSubjectsWithClasses);
 
   const [selectedSubjectCategory, setSelectedSubjectCategory] = useState(null);
   const [selectedEducationLevel, setSelectedEducationLevel] = useState(null);
@@ -43,47 +43,49 @@ const SearchSubject = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <>
       <FAB
         style={styles.fab}
         label="Create Class"
         onPress={handleCreateClassPress}
       />
-      <View style={localStyles.filtersContainer}>
-        <DropDown
-          label={"Education Levels"}
-          mode={"outlined"}
-          inputProps={{ style: styles.dropDown }}
-          dropDownStyle={styles.input}
-          visible={showEducationLevelDropdown}
-          showDropDown={() => setShowEducationLevelDropdown(true)}
-          onDismiss={() => setShowEducationLevelDropdown(false)}
-          value={selectedEducationLevel}
-          setValue={setSelectedEducationLevel}
-          list={extractLabelList(educationLevels)}
-        />
-        <DropDown
-          label={"Subject Category"}
-          mode={"outlined"}
-          inputProps={{ style: styles.dropDown }}
-          style={styles.input}
-          visible={showSubjectCategoryDropdown}
-          showDropDown={() => setShowSubjectCategoryDropdown(true)}
-          onDismiss={() => setShowSubjectCategoryDropdown(false)}
-          value={selectedSubjectCategory}
-          setValue={setSelectedSubjectCategory}
-          list={extractLabelList(subjectCategories)}
-        />
-      </View>
-      {filteredSubjects.map((subject) => (
-        <Card onPress={() => handleSubjectPress(subject)} style={styles.card}>
-          <Card.Title title={subject.name} />
-          <Card.Content>
-            <Paragraph>{subject.description}</Paragraph>
-          </Card.Content>
-        </Card>
-      ))}
-    </ScrollView>
+      <ScrollView style={styles.container}>
+        <View style={localStyles.filtersContainer}>
+          <DropDown
+            label={"Education Levels"}
+            mode={"outlined"}
+            inputProps={{ style: styles.dropDown }}
+            dropDownStyle={styles.input}
+            visible={showEducationLevelDropdown}
+            showDropDown={() => setShowEducationLevelDropdown(true)}
+            onDismiss={() => setShowEducationLevelDropdown(false)}
+            value={selectedEducationLevel}
+            setValue={setSelectedEducationLevel}
+            list={extractLabelList(educationLevels)}
+          />
+          <DropDown
+            label={"Subject Category"}
+            mode={"outlined"}
+            inputProps={{ style: styles.dropDown }}
+            style={styles.input}
+            visible={showSubjectCategoryDropdown}
+            showDropDown={() => setShowSubjectCategoryDropdown(true)}
+            onDismiss={() => setShowSubjectCategoryDropdown(false)}
+            value={selectedSubjectCategory}
+            setValue={setSelectedSubjectCategory}
+            list={extractLabelList(subjectCategories)}
+          />
+        </View>
+        {filteredSubjects.map((subject) => (
+          <Card onPress={() => handleSubjectPress(subject)} style={styles.card}>
+            <Card.Title title={subject.name} />
+            <Card.Content>
+              <Paragraph>{subject.description}</Paragraph>
+            </Card.Content>
+          </Card>
+        ))}
+      </ScrollView>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ export const getUserClasses = (state) => state.api.userClasses;
 export const getUserPrivateClasses = (state) => state.api.userPrivateClasses;
 export const getPrivateClasses = (state) => state.api.privateClasses;
 export const getSubjects = (state) => state.api.subjects;
+
 export const getNewSubject = (state) => state.api.newSubjects;
 export const getEducationLevels = (state) => state.api.educationLevels;
 export const getSubjectCategories = (state) => state.api.subjectCategories;
@@ -38,3 +39,9 @@ export const selectClass = (
     : isPrivate
     ? state.api.privateClasses.find((cls) => cls.id === classId)
     : state.api.classes.find((cls) => cls.id === classId);
+
+export const getSubjectsWithClasses = (state) => {
+  return state.api.subjects.filter(
+    (subject) => selectSubjectClasses(state, subject.id).length > 0
+  );
+};

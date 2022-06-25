@@ -3,6 +3,7 @@ import { ScrollView } from "react-native";
 import { Button, List, Portal, Dialog, Paragraph } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 
+import ListAccordion from "../ListAccordion";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 import api from "../../services/api/Api";
@@ -92,7 +93,7 @@ const ClassInfo = ({ navigation, route }) => {
         </Dialog>
       </Portal>
       <ScrollView style={styles.container}>
-        <List.Accordion title={"Class details"} id={1}>
+        <ListAccordion title={"Class details"} id={1}>
           <List.Item
             title={"Duration of a class"}
             description={`${cls.duration} hours`}
@@ -106,9 +107,9 @@ const ClassInfo = ({ navigation, route }) => {
             description={`${cls.noOfTimes}`}
           />
           <List.Item title={"Description"} description={cls.description} />
-        </List.Accordion>
+        </ListAccordion>
         {cls.tutor && (
-          <List.Accordion title={"Tutor details"} id={2}>
+          <ListAccordion title={"Tutor details"} id={2}>
             <List.Item
               title={"Tutor name"}
               description={`${cls.tutor.fullName}`}
@@ -121,20 +122,20 @@ const ClassInfo = ({ navigation, route }) => {
               title={"Description"}
               description={`${cls.tutor.description}`}
             />
-          </List.Accordion>
+          </ListAccordion>
         )}
         {isPrivate && cls.tutorOffers && (
-          <List.Accordion title={"Tutor Offers"} id={3}>
+          <ListAccordion title={"Tutor Offers"} id={3}>
             {cls.tutorOffers.map((offer) => (
               <ProfileCard
                 profile={offer.tutor}
                 onSelect={() => handleSelectTutor(offer.tutor.id)}
               />
             ))}
-          </List.Accordion>
+          </ListAccordion>
         )}
         {!isPrivate && (
-          <List.Accordion title={"Participant details"} id={4} mode="contained">
+          <ListAccordion title={"Participant details"} id={4} mode="contained">
             {cls.studentCapacity && (
               <List.Item
                 title={"Class capacity"}
@@ -145,9 +146,9 @@ const ClassInfo = ({ navigation, route }) => {
               title={"Participating Students"}
               description={`${cls.students?.length}`}
             />
-          </List.Accordion>
+          </ListAccordion>
         )}
-        <List.Accordion title={"Payment details"} id={5} mode="contained">
+        <ListAccordion title={"Payment details"} id={5} mode="contained">
           <List.Item
             title={"Rate Per hour"}
             description={`${cls.ratePerHour}`}
@@ -156,7 +157,7 @@ const ClassInfo = ({ navigation, route }) => {
             title={"Total payment"}
             description={cls.ratePerHour * cls.noOfTimes}
           />
-        </List.Accordion>
+        </ListAccordion>
       </ScrollView>
       <Button
         style={styles.actionbutton}

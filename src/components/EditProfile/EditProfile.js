@@ -19,13 +19,14 @@ const EditProfile = ({ navigation }) => {
   const dispatcher = useDispatch();
 
   const educationLevels = useSelector(getEducationLevels);
-  const { currentFirstName, currentLastName, currentBio } =
+  const { firstName, lastName, description, educationLevel } =
     useSelector(getUserInfo);
-  const [firstName, setFirstName] = useState(currentFirstName);
-  const [lastName, setLastName] = useState(currentLastName);
-  const [bio, setBio] = useState(currentBio);
+  const [inputFirstName, setFirstName] = useState(firstName);
+  const [inputLastName, setLastName] = useState(lastName);
+  const [inputDescription, setDescription] = useState(description);
 
-  const [selectedEducationLevel, setSelectedEducationLevel] = useState(null);
+  const [selectedEducationLevel, setSelectedEducationLevel] =
+    useState(educationLevel);
   const [showEducationLevelDropdown, setShowEducationLevelDropdown] =
     useState(false);
 
@@ -36,7 +37,7 @@ const EditProfile = ({ navigation }) => {
       api.editProfile.createAction({
         firstName,
         lastName,
-        bio,
+        description: bio,
         selectedEducationLevel,
       })
     );
@@ -52,22 +53,22 @@ const EditProfile = ({ navigation }) => {
         style={styles.input}
         placeholder="Enter first name"
         textContentType="name"
-        value={firstName}
+        value={inputFirstName}
         onChangeText={(text) => setFirstName(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Enter last name"
         textContentType="familyname"
-        value={lastName}
+        value={inputLastName}
         onChangeText={(text) => setLastName(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Enter your Bio"
         textContentType="jobTitle"
-        value={bio}
-        onChangeText={(text) => setBio(text)}
+        value={inputDescription}
+        onChangeText={(text) => setDescription(text)}
         multiline
       />
       <DropDown

@@ -43,7 +43,7 @@ const handleTransform = ({ action, state, endpoint }) => {
         errors: removeError(state.errors, endpointName),
         status: {
           ...state.status,
-          [endpointName]: apiStatusEnum.SUCCESS,
+          [endpointName + "Status"]: apiStatusEnum.SUCCESS,
         },
       };
     }
@@ -63,7 +63,7 @@ const handleTransform = ({ action, state, endpoint }) => {
         errors: toCamelCaseKeys(errors),
         status: {
           ...state.status,
-          [endpointName]: apiStatusEnum.ERROR,
+          [endpointName + "Status"]: apiStatusEnum.ERROR,
         },
       };
     }
