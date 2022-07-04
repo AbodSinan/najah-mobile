@@ -22,25 +22,27 @@ export default function userReducer(state = defaultState, action) {
   switch (action.type) {
     case REHYDRATE: {
       const incoming = action.payload && action.payload.user;
-      return Object.freeze({
-        ...rehydrateReducer(
-          [
-            "signedIn",
-            "firstName",
-            "lastName",
-            "fullName",
-            "email",
-            "gender",
-            "token",
-            "userType",
-            "educationLevel",
-            "image",
-            "description",
-          ],
-          state,
-          incoming
-        ),
-      });
+      if (incoming && incoming.version === state.version) {
+        return Object.freeze({
+          ...rehydrateReducer(
+            [
+              "signedIn",
+              "firstName",
+              "lastName",
+              "fullName",
+              "email",
+              "gender",
+              "token",
+              "userType",
+              "educationLevel",
+              "image",
+              "description",
+            ],
+            state,
+            incoming
+          ),
+        });
+      }
     }
 
     case userActions.LOGOUT: {
