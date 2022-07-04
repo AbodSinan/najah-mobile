@@ -1,3 +1,5 @@
+import { chain } from "lodash";
+
 export const getUserType = (state) => state.user.userType;
 export const getUserToken = (state) => state.user.token;
 export const getUserInfo = (state) => state.user;
@@ -45,3 +47,9 @@ export const getSubjectsWithClasses = (state) => {
     (subject) => selectSubjectClasses(state, subject.id).length > 0
   );
 };
+
+export const getLatestClass = (state) =>
+  chain(state.api.userClasses).sortBy("created").last().value();
+
+export const getLatestPrivateClass = (state) =>
+  chain(state.api.userPrivateClasses).sortBy("created").last().value();

@@ -4,10 +4,14 @@ import { ScrollView, View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 
+import LoadingContainer from "../../LoadingContainer";
+
 import {
   getSubjects,
   getSubjectCategories,
   getEducationLevels,
+  getApiStatus,
+  getLatestPrivateClass,
 } from "../../../sagas/selectors";
 import { filterSubjects, extractLabelList } from "../../../utils/commonUtils";
 import api from "../../../services/api/Api";
@@ -19,6 +23,8 @@ const CreatePrivateClass = ({ navigation }) => {
   const subjects = useSelector(getSubjects);
   const subjectCategories = useSelector(getSubjectCategories);
   const educationLevels = useSelector(getEducationLevels);
+  const { createPrivateClassStatus } = useSelector(getApiStatus);
+  const latestPrivateClass = useSelector(getLatestPrivateClass);
 
   const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -49,62 +55,75 @@ const CreatePrivateClass = ({ navigation }) => {
       })
     );
   };
+
+  const handleSuccess = () => {
+    if (createPrivateClassStatus === apiStatusEnum.SUCCESS) {
+      const { id } = latestPrivateClass;
+      navigator.navigate("Class Info", { classId: id, isPrivate: true });
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <View>
-        <DropDown
-          label={"Subject Category"}
-          mode={"outlined"}
-          inputProps={{ style: styles.dropDown }}
-          style={styles.input}
-          visible={showSubjectCategoryDropdown}
-          showDropDown={() => setShowSubjectCategoryDropdown(true)}
-          onDismiss={() => setShowSubjectCategoryDropdown(false)}
-          value={selectedSubjectCategory}
-          setValue={setSelectedSubjectCategory}
-          list={extractLabelList(subjectCategories)}
-        />
-        <DropDown
-          label={"Education Levels"}
-          mode={"outlined"}
-          inputProps={{ style: styles.dropDown }}
-          style={styles.input}
-          visible={showEducationLevelDropdown}
-          showDropDown={() => setShowEducationLevelDropdown(true)}
-          onDismiss={() => setShowEducationLevelDropdown(false)}
-          value={selectedEducationLevel}
-          setValue={setSelectedEducationLevel}
-          list={extractLabelList(educationLevels)}
-        />
-        <DropDown
-          label={"Subject"}
-          mode={"outlined"}
-          inputProps={{ style: styles.dropDown }}
-          style={styles.input}
-          visible={showSubjectDropdown}
-          showDropDown={() => setShowSubjectDropdown(true)}
-          onDismiss={() => setShowSubjectDropdown(false)}
-          value={selectedSubject}
-          setValue={setSelectedSubject}
-          list={extractLabelList(filteredSubjects)}
-        />
-        <TextInput
-          style={styles.input}
-          keyboardType="decimal-pad"
-          placeholder="Rate"
-          label="Rate"
-          value={rate}
-          onChangeText={(text) => setRate(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Description"
-          label="Description"
-          value={description}
-          onChangeText={(text) => setDescription(text)}
-          multiline
-        />
-      </View>
+      <LoadingContainer
+        apiStatus={createPrivateClassStatus}
+        onSuccess={handleSuccess}
+      >
+        <View>
+          <DropDown
+            label={"Subject Category"}
+            mode={"outlined"}
+            inputProps={{ style: styles.dropDown }}
+            style={styles.input}
+            visible={showSubjectCategoryDropdown}
+            showDropDown={() => setShowSubjectCategoryDropdown(true)}
+            onDismiss={() => setShowSubjectCategoryDropdown(false)}
+            value={selectedSubjectCategory}
+            setValue={setSelectedSubjectCategory}
+            list={extractLabelList(subjectCategories)}
+          />
+          <DropDown
+            label={"Education Levels"}
+            mode={"outlined"}
+            inputProps={{ style: styles.dropDown }}
+            style={styles.input}
+            visible={showEducationLevelDropdown}
+            showDropDown={() => setShowEducationLevelDropdown(true)}
+            onDismiss={() => setShowEducationLevelDropdown(false)}
+            value={selectedEducationLevel}
+            setValue={setSelectedEducationLevel}
+            list={extractLabelList(educationLevels)}
+          />
+          <DropDown
+            label={"Subject"}
+            mode={"outlined"}
+            inputProps={{ style: styles.dropDown }}
+            style={styles.input}
+            visible={showSubjectDropdown}
+            showDropDown={() => setShowSubjectDropdown(true)}
+            onDismiss={() => setShowSubjectDropdown(false)}
+            value={selectedSubject}
+            setValue={setSelectedSubject}
+            list={extractLabelList(filteredSubjects)}
+          />
+          <TextInput
+            style={styles.input}
+            keyboardType="decimal-pad"
+            placeholder="Rate"
+            label="Rate"
+            value={rate}
+            onChangeText={(text) => setRate(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Description"
+            label="Description"
+            value={description}
+            onChangeText={(text) => setDescription(text)}
+            multiline
+          />
+        </View>
+      </LoadingContainer>
       <Button
         mode="contained"
         onPress={handleSubmit}

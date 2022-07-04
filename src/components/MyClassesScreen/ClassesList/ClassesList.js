@@ -48,7 +48,7 @@ const ClassesList = ({ navigation }) => {
         </Button>
       </View>
       <View style={styles.container}>
-        <View style={styles.container}>
+        <View>
           {classType === classTypeEnum.ACADEMY ? (
             <>
               <Headline>Academy Classes</Headline>

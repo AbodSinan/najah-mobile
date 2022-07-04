@@ -8,15 +8,18 @@ import {
   getSubjects,
   getSubjectCategories,
   getEducationLevels,
-  getNewSubject,
-  getCreateClassStatus,
+  getApiStatus,
+  getLatestClass,
 } from "../../sagas/selectors";
-import { filterSubjects } from "../../utils/commonUtils";
+import { filterSubjects, extractLabelList } from "../../utils/commonUtils";
 import api from "../../services/api/Api";
 import frequencyEnum from "../../enums/frequencyEnum";
-import { extractLabelList } from "../../utils/commonUtils";
+
+import AddSubjectModal from "../AddSubjectModal";
+import LoadingContainer from "../LoadingContainer";
+
 import styles from "../../styles";
-import AddSubjectModal from "../AddSubjectModal/AddSubjectModal";
+import apiStatusEnum from "../../enums/apiStatusEnum";
 
 const CreateClass = ({ navigator }) => {
   const dispatcher = useDispatch();
@@ -28,7 +31,8 @@ const CreateClass = ({ navigator }) => {
   const subjects = useSelector(getSubjects);
   const subjectCategories = useSelector(getSubjectCategories);
   const educationLevels = useSelector(getEducationLevels);
-  const newSubject = useSelector(getNewSubject);
+  const { createClassStatus } = useSelector(getApiStatus);
+  const latestClass = useSelector(getLatestClass);
 
   const [showSubjectDropdown, setShowSubjectDropdown] = useState(false);
   const [showFrequencyDropdown, setShowFrequencyDropdown] = useState(false);
@@ -77,95 +81,104 @@ const CreateClass = ({ navigator }) => {
     );
   };
 
+  const handleSuccess = () => {
+    if (createClassStatus === apiStatusEnum.SUCCESS) {
+      const { id } = latestClass;
+      navigator.navigate("Class Info", { classId: id });
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <AddSubjectModal
-        isShown={isAddSubjectModalShown}
-        onDismiss={() => setIsAddSubjectModalShown(false)}
-      />
-      <DropDown
-        label={"Subject Category"}
-        mode={"outlined"}
-        inputProps={{ style: styles.dropDown }}
-        style={styles.input}
-        visible={showSubjectCategoryDropdown}
-        showDropDown={() => setShowSubjectCategoryDropdown(true)}
-        onDismiss={() => setShowSubjectCategoryDropdown(false)}
-        value={selectedSubjectCategory}
-        setValue={setSelectedSubjectCategory}
-        list={extractLabelList(subjectCategories)}
-      />
-      <DropDown
-        label={"Education Levels"}
-        mode={"outlined"}
-        style={styles.input}
-        inputProps={{ style: styles.dropDown }}
-        visible={showEducationLevelDropdown}
-        showDropDown={() => setShowEducationLevelDropdown(true)}
-        onDismiss={() => setShowEducationLevelDropdown(false)}
-        value={selectedEducationLevel}
-        setValue={setSelectedEducationLevel}
-        list={extractLabelList(educationLevels)}
-      />
-      <DropDown
-        label={"Subject"}
-        mode={"outlined"}
-        inputProps={{ style: styles.dropDown }}
-        style={styles.input}
-        visible={showSubjectDropdown}
-        showDropDown={() => setShowSubjectDropdown(true)}
-        onDismiss={() => setShowSubjectDropdown(false)}
-        value={selectedSubject}
-        setValue={handleSelectSubject}
-        list={extractLabelList(filteredSubjects, "New Subject")}
-      />
-      <DropDown
-        label={"Frequency"}
-        mode={"outlined"}
-        inputProps={{ style: styles.dropDown }}
-        style={styles.input}
-        visible={showFrequencyDropdown}
-        showDropDown={() => setShowFrequencyDropdown(true)}
-        onDismiss={() => setShowFrequencyDropdown(false)}
-        value={frequency}
-        setValue={setFrequency}
-        list={frequencyList}
-      />
-      <TextInput
-        style={styles.input}
-        keyboardType="decimal-pad"
-        placeholder="Rate per hour"
-        label="Rate per hour"
-        value={ratePerHour}
-        onChangeText={(text) => setRatePerHour(text)}
-      />
-      <TextInput
-        style={styles.input}
-        keyboardType="decimal-pad"
-        placeholder="Number of classes"
-        label="Number of classes"
-        value={noOfTimes}
-        onChangeText={(text) => setNoOfTimes(text)}
-      />
-      <TextInput
-        style={styles.input}
-        keyboardType="decimal-pad"
-        placeholder="Class duration (Hours)"
-        label="Class duration (Hours)"
-        value={duration}
-        onChangeText={(text) => setDuration(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Description"
-        label="Description"
-        value={description}
-        onChangeText={(text) => setDescription(text)}
-        multiline
-      />
-      <Button mode="contained" onPress={handleSubmit} title="Submit">
-        Submit
-      </Button>
+      <LoadingContainer apiStatus={createClassStatus} onSuccess={handleSuccess}>
+        <AddSubjectModal
+          isShown={isAddSubjectModalShown}
+          onDismiss={() => setIsAddSubjectModalShown(false)}
+        />
+        <DropDown
+          label={"Subject Category"}
+          mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
+          style={styles.input}
+          visible={showSubjectCategoryDropdown}
+          showDropDown={() => setShowSubjectCategoryDropdown(true)}
+          onDismiss={() => setShowSubjectCategoryDropdown(false)}
+          value={selectedSubjectCategory}
+          setValue={setSelectedSubjectCategory}
+          list={extractLabelList(subjectCategories)}
+        />
+        <DropDown
+          label={"Education Levels"}
+          mode={"outlined"}
+          style={styles.input}
+          inputProps={{ style: styles.dropDown }}
+          visible={showEducationLevelDropdown}
+          showDropDown={() => setShowEducationLevelDropdown(true)}
+          onDismiss={() => setShowEducationLevelDropdown(false)}
+          value={selectedEducationLevel}
+          setValue={setSelectedEducationLevel}
+          list={extractLabelList(educationLevels)}
+        />
+        <DropDown
+          label={"Subject"}
+          mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
+          style={styles.input}
+          visible={showSubjectDropdown}
+          showDropDown={() => setShowSubjectDropdown(true)}
+          onDismiss={() => setShowSubjectDropdown(false)}
+          value={selectedSubject}
+          setValue={handleSelectSubject}
+          list={extractLabelList(filteredSubjects, "New Subject")}
+        />
+        <DropDown
+          label={"Frequency"}
+          mode={"outlined"}
+          inputProps={{ style: styles.dropDown }}
+          style={styles.input}
+          visible={showFrequencyDropdown}
+          showDropDown={() => setShowFrequencyDropdown(true)}
+          onDismiss={() => setShowFrequencyDropdown(false)}
+          value={frequency}
+          setValue={setFrequency}
+          list={frequencyList}
+        />
+        <TextInput
+          style={styles.input}
+          keyboardType="decimal-pad"
+          placeholder="Rate per hour"
+          label="Rate per hour"
+          value={ratePerHour}
+          onChangeText={(text) => setRatePerHour(text)}
+        />
+        <TextInput
+          style={styles.input}
+          keyboardType="decimal-pad"
+          placeholder="Number of classes"
+          label="Number of classes"
+          value={noOfTimes}
+          onChangeText={(text) => setNoOfTimes(text)}
+        />
+        <TextInput
+          style={styles.input}
+          keyboardType="decimal-pad"
+          placeholder="Class duration (Hours)"
+          label="Class duration (Hours)"
+          value={duration}
+          onChangeText={(text) => setDuration(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Description"
+          label="Description"
+          value={description}
+          onChangeText={(text) => setDescription(text)}
+          multiline
+        />
+        <Button mode="contained" onPress={handleSubmit} title="Submit">
+          Submit
+        </Button>
+      </LoadingContainer>
     </ScrollView>
   );
 };

@@ -61,6 +61,7 @@ class Api extends baseApi {
     endpoint: "private/private-classes/",
     method: "POST",
     prepareRequest: prepareRequestUtils.prepareCreatePrivateClassRequest,
+    prepareResponse: prepareResponseUtils.prepareCreatePrivateClassResponse,
   });
   getSubjects = new Endpoint({
     endpoint: "education/subjects/",
