@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import configureStore from "./src/store";
 import { theme } from "./src/styles/theme";
 import MainScreen from "./src/components/MainScreen";
+import Chat from "./src/components/Chat";
 
 const { store, persistor } = configureStore();
 
@@ -50,6 +51,7 @@ export default function App() {
 
   return (
     <StoreProvider store={store}>
+      <Chat />
       <PersistGate persistor={persistor}>
         <PaperProvider theme={theme}>
           <NavigationContainer
