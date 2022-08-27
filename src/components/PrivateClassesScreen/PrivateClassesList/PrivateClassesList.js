@@ -33,6 +33,7 @@ const PrivateClassesList = ({ navigation }) => {
         )}
         {privateClasses.map((cls) => (
           <ClassCard
+            key={cls.id}
             cls={cls}
             onCardPress={handlePrivateClassPress}
             isPrivate

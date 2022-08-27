@@ -54,6 +54,7 @@ const ClassesList = ({ navigation }) => {
               <Headline>Academy Classes</Headline>
               {classes.map((cls) => (
                 <ClassCard
+                  key={cls.id}
                   cls={cls}
                   onCardPress={() => handleClassPress(cls.id)}
                 />
@@ -64,6 +65,7 @@ const ClassesList = ({ navigation }) => {
               <Headline>Private Classes</Headline>
               {privateClasses.map((cls) => (
                 <ClassCard
+                  key={cls.id}
                   cls={cls}
                   onCardPress={() => handleClassPress(cls.id)}
                   isPrivate

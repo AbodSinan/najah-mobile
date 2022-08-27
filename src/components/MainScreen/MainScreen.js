@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
+import ChatScreen from "../ChatScreen";
 import MyClassesScreen from "../MyClassesScreen";
 import LoginScreen from "../LoginScreen";
 import RegisterScreen from "../RegisterScreen";
@@ -13,6 +14,8 @@ import PrivateClassesScreen from "../PrivateClassesScreen";
 
 import { getUserToken } from "../../sagas/selectors";
 import EditProfile from "../EditProfile/EditProfile";
+
+import * as settings from "../../settings";
 
 import styles from "../../styles";
 
@@ -69,6 +72,17 @@ const MainScreen = ({ navigator }) => {
               ),
             }}
           />
+          {settings.IS_CHAT_SERVICE_ENABLED && (
+            <Tab.Screen
+              name="Chat"
+              component={ChatScreen}
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <Icon name="comment-dots" color={color} size={26} />
+                ),
+              }}
+            />
+          )}
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

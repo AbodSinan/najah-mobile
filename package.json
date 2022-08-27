@@ -1,7 +1,7 @@
 {
   "name": "najah-mobile",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "App.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@babel/runtime": "^7.18.6",
     "@react-native-async-storage/async-storage": "^1.17.3",
     "@react-navigation/material-bottom-tabs": "^6.2.1",
     "@react-navigation/native": "^6.0.10",
@@ -23,12 +24,11 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-gesture-handler": "~2.1.0",
+    "react-native-gifted-chat": "^1.0.3",
     "react-native-image-picker": "^4.8.2",
     "react-native-paper": "^4.12.0",
     "react-native-paper-dropdown": "^1.0.7",
     "react-native-reanimated": "~2.3.1",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-safe-area-view": "react-native-community/react-native-safe-area-view",
     "react-native-screens": "~3.10.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
@@ -43,7 +43,7 @@
     "yarn": "^1.22.18"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.18.6"
   },
   "private": true
 }

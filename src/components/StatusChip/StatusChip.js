@@ -26,7 +26,6 @@ const statusMapping = {
 };
 
 const StatusChip = ({ status }) => {
-  console.log(status);
   return (
     <Chip
       type="outlined"
