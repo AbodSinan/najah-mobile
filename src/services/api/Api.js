@@ -81,7 +81,11 @@ class Api extends baseApi {
     endpoint: "education/subject-categories/",
     prepareResponse: prepareResponseUtils.prepareSubjectCategoryResponse,
   });
-  classBookings = new Endpoint({ endpoint: "booking/class-bookings/%s" });
+  classBookings = new Endpoint({
+    endpoint: "booking/class-bookings/%s",
+    prepareRequest: prepareRequestUtils.prepareClassBookingsRequest,
+    prepareResponse: prepareResponseUtils.prepareClassBookingsResponse,
+  });
   /*TODO: Check if default prepareRequest works */
   createClassBooking = new Endpoint({
     endpoint: "booking/class-bookings/%s",
@@ -102,7 +106,9 @@ class Api extends baseApi {
 }
 
 export const apiMapping = {
-  api: new Api({ baseUrl: "https://i-najah.herokuapp.com/" }),
+  api: new Api({
+    baseUrl: "http://ec2-13-228-213-53.ap-southeast-1.compute.amazonaws.com/",
+  }),
 };
 
 export default apiMapping["api"];

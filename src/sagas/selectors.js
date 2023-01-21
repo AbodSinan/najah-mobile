@@ -42,6 +42,9 @@ export const selectClass = (
     ? state.api.privateClasses.find((cls) => cls.id === classId)
     : state.api.classes.find((cls) => cls.id === classId);
 
+export const getClassBookings = (state, classId) =>
+  state.api.classBookings[classId];
+
 export const getSubjectsWithClasses = (state) => {
   return state.api.subjects.filter(
     (subject) => selectSubjectClasses(state, subject.id).length > 0

@@ -7,15 +7,23 @@ import ListAccordion from "../ListAccordion";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 import api from "../../services/api/Api";
-import { getApiStatus, selectClass } from "../../sagas/selectors";
+import {
+  getApiStatus,
+  getClassBookings,
+  selectClass,
+} from "../../sagas/selectors";
 import styles from "../../styles";
 import apiStatusEnum from "../../enums/apiStatusEnum";
 
 const ClassInfo = ({ navigation, route }) => {
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
   const { classId, isPrivate, ownClass } = route.params;
   const [isModalShown, setIsModalShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const classBookings = useSelector((state) =>
+    getClassBookings(state, classId)
+  );
+  console.log("OWN CLASS", ownClass);
 
   const cls = useSelector((state) =>
     selectClass(state, classId, isPrivate, ownClass)
@@ -27,23 +35,34 @@ const ClassInfo = ({ navigation, route }) => {
   const handleConfirmPress = () => {
     if (ownClass) {
       if (isPrivate) {
-        dispatcher(api.cancelPrivateClass.createAction({ classId }));
+        dispatch(api.cancelPrivateClass.createAction({ classId }));
       } else {
-        dispatcher(api.cancelClass.createAction({ classId }));
+        dispatch(api.cancelClass.createAction({ classId }));
       }
     }
     if (isPrivate) {
-      dispatcher(api.createTutorOffer.createAction({ privateClass: classId }));
+      dispatch(api.createTutorOffer.createAction({ privateClass: classId }));
     } else {
-      dispatcher(api.createClassBooking.createAction({ classId }));
+      dispatch(api.createClassBooking.createAction({ classId }));
     }
   };
 
   const handleSelectTutor = (tutorId) => {
-    dispatcher(
+    dispatch(
       api.selectTutor.createAction({ privateClassId: classId, tutorId })
     );
   };
+
+  const handleConfirmStudent = (studentId) => {
+    console.log("CONFIRM STUDENT");
+  };
+
+  useEffect(() => {
+    // Fetch booking for the classes if ownClass
+    if (ownClass) {
+      dispatch(api.classBookings.createAction({ classId }));
+    }
+  }, []);
 
   useEffect(() => {
     if (createOfferStatus && createOfferStatus === apiStatusEnum.SUCCESS) {
@@ -146,6 +165,16 @@ const ClassInfo = ({ navigation, route }) => {
               title={"Participating Students"}
               description={`${cls.students?.length}`}
             />
+            {classBookings && (
+              <ListAccordion title={"Tutor Offers"} id={3}>
+                {classBookings.map((booking) => (
+                  <ProfileCard
+                    profile={booking.student}
+                    onSelect={() => handleConfirmStudent(booking.student.id)}
+                  />
+                ))}
+              </ListAccordion>
+            )}
           </ListAccordion>
         )}
         <ListAccordion title={"Payment details"} id={5} mode="contained">

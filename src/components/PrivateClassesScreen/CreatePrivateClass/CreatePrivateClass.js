@@ -13,12 +13,13 @@ import {
   getApiStatus,
   getLatestPrivateClass,
 } from "../../../sagas/selectors";
+import apiStatusEnum from "../../../enums/apiStatusEnum";
 import { filterSubjects, extractLabelList } from "../../../utils/commonUtils";
 import api from "../../../services/api/Api";
 import styles from "../../../styles";
 
 const CreatePrivateClass = ({ navigation }) => {
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
 
   const subjects = useSelector(getSubjects);
   const subjectCategories = useSelector(getSubjectCategories);
@@ -46,7 +47,7 @@ const CreatePrivateClass = ({ navigation }) => {
   const [rate, setRate] = useState("");
 
   const handleSubmit = () => {
-    dispatcher(
+    dispatch(
       api.createPrivateClass.createAction({
         subject: selectedSubject,
         educationLevel: selectedEducationLevel,
@@ -59,7 +60,7 @@ const CreatePrivateClass = ({ navigation }) => {
   const handleSuccess = () => {
     if (createPrivateClassStatus === apiStatusEnum.SUCCESS) {
       const { id } = latestPrivateClass;
-      navigator.navigate("Class Info", { classId: id, isPrivate: true });
+      navigation.navigate("Class Info", { classId: id, isPrivate: true });
     }
   };
 

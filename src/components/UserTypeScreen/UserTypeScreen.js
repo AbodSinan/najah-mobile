@@ -8,11 +8,11 @@ import * as selectors from "../../sagas/selectors";
 import UserTypeEnum from "../../enums/UserTypeEnum";
 
 const UserTypeScreen = ({ navigation }) => {
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
   const userType = useSelector(selectors.getUserType);
 
   const handleUserTypeSelect = (userType) => {
-    dispatcher(userActions.setUserType({ userType }));
+    dispatch(userActions.setUserType({ userType }));
     navigation.navigate("Register");
   };
 

@@ -16,7 +16,7 @@ import styles from "../../styles";
 import LoadingContainer from "../LoadingContainer/LoadingContainer";
 
 const EditProfile = ({ navigation }) => {
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
 
   const educationLevels = useSelector(getEducationLevels);
   const { firstName, lastName, description, educationLevel } =
@@ -33,11 +33,11 @@ const EditProfile = ({ navigation }) => {
   const { editProfileStatus } = useSelector(getUserStatus);
 
   const handleSubmit = () => {
-    dispatcher(
+    dispatch(
       api.editProfile.createAction({
-        firstName,
-        lastName,
-        description: bio,
+        firstName: inputFirstName,
+        lastName: inputLastName,
+        description: inputDescription,
         selectedEducationLevel,
       })
     );

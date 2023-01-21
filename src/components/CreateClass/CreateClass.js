@@ -21,8 +21,8 @@ import LoadingContainer from "../LoadingContainer";
 import styles from "../../styles";
 import apiStatusEnum from "../../enums/apiStatusEnum";
 
-const CreateClass = ({ navigator }) => {
-  const dispatcher = useDispatch();
+const CreateClass = ({ navigation }) => {
+  const dispatch = useDispatch();
   const frequencyList = Object.entries(frequencyEnum).map((key) => ({
     label: key[0],
     value: key[1],
@@ -67,7 +67,7 @@ const CreateClass = ({ navigator }) => {
   };
 
   const handleSubmit = () => {
-    dispatcher(
+    dispatch(
       api.createClass.createAction({
         subject: selectedSubject,
         educationLevel: selectedEducationLevel,
@@ -84,7 +84,7 @@ const CreateClass = ({ navigator }) => {
   const handleSuccess = () => {
     if (createClassStatus === apiStatusEnum.SUCCESS) {
       const { id } = latestClass;
-      navigator.navigate("Class Info", { classId: id });
+      navigation.navigate("Class Info", { classId: id });
     }
   };
 

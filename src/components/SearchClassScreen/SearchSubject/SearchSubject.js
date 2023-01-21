@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Card, FAB, Paragraph } from "react-native-paper";
+import { Card, FAB, Paragraph, Title } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import {
   getEducationLevels,
@@ -76,6 +76,12 @@ const SearchSubject = ({ navigation }) => {
             list={extractLabelList(subjectCategories)}
           />
         </View>
+        {filterSubjects.length > 0 ? (
+          <Title>المواد المتوفرة</Title>
+        ) : (
+          <Title>لا توجد مواد حاليا</Title>
+        )}
+
         {filteredSubjects.map((subject) => (
           <Card
             key={subject.id}

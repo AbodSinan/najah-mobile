@@ -8,12 +8,12 @@ import * as selectors from "../../sagas/selectors";
 import styles from "../../styles";
 
 const LoginScreen = ({ navigation }) => {
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onHandleLogin = () => {
-    dispatcher(api.login.createAction({ email, password }));
+    dispatch(api.login.createAction({ email, password }));
   };
 
   const loginErrors = useSelector(selectors.getLoginErrors);
@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
       <Button mode="contained" onPress={onHandleLogin}>
         Login
       </Button>
-      <Button mode="text" onPress={() => navigation.navigate("Create Profile")}>
+      <Button mode="text" onPress={() => navigation.navigate("Register")}>
         Register
       </Button>
     </View>

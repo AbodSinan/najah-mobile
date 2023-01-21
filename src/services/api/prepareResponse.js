@@ -74,3 +74,20 @@ export const prepareCreatePrivateClassResponse = ({ data, state }) => ({
     privateClasses: [...state.privateClasses, ...data.response],
   },
 });
+
+export const prepareClassBookingsResponse = ({ data, state }) => {
+  if (data.response.length == 0) {
+    return {};
+  }
+
+  const classId = data.response[0].booking_class;
+
+  return {
+    response: {
+      classBookings: {
+        ...state.classBookings,
+        [classId]: [...data.response],
+      },
+    },
+  };
+};

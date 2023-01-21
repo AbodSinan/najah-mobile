@@ -1,5 +1,6 @@
 import { REHYDRATE } from "redux-persist/lib/constants";
 import * as userActions from "../actions/user";
+import apiStatusEnum from "../enums/apiStatusEnum";
 import { rehydrateReducer } from "../utils/reducerUtils";
 
 const defaultState = Object.freeze({
@@ -15,7 +16,9 @@ const defaultState = Object.freeze({
   image: null,
   description: null,
   errors: [],
-  status: {},
+  status: {
+    editProfileStatus: apiStatusEnum.INITIAL,
+  },
 });
 
 export default function userReducer(state = defaultState, action) {

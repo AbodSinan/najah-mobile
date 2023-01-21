@@ -7,7 +7,7 @@ import { theme } from "../../styles/theme";
 
 const Stack = createStackNavigator();
 
-const PrivateClassesScreen = ({ navigation }) => {
+const PrivateClassesScreen = () => {
   return (
     <Stack.Navigator
       screenOptions={{

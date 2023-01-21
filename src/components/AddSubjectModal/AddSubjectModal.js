@@ -22,7 +22,7 @@ import styles from "../../styles";
 import apiStatusEnum from "../../enums/apiStatusEnum";
 
 const AddSubjectModal = ({ isShown, onDismiss }) => {
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
 
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -41,7 +41,7 @@ const AddSubjectModal = ({ isShown, onDismiss }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleConfirmPress = () => {
-    dispatcher(
+    dispatch(
       api.createSubject.createAction({
         name,
         subjectCategory: selectedSubjectCategory,

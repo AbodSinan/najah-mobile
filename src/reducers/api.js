@@ -11,6 +11,7 @@ const defaultState = Object.freeze({
   classes: [],
   privateClasses: [],
   subjects: [],
+  classBookings: {},
   newSubject: {},
   status: {},
   errors: [],
@@ -19,7 +20,6 @@ const defaultState = Object.freeze({
 export default function apiReducer(state = defaultState, action) {
   switch (action.type) {
     case REHYDRATE: {
-      console.log(action);
       const incoming = action.payload && action.payload.api;
       if (incoming && incoming.version === state.version) {
         return Object.freeze({
@@ -32,6 +32,7 @@ export default function apiReducer(state = defaultState, action) {
               "subjectCategories",
               "educationLevels",
               "classes",
+              "classBookings",
               "subjects",
               "newSubject",
             ],

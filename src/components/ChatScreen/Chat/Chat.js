@@ -6,8 +6,6 @@ import { Button, TextInput, Text } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import { View } from "react-native-web";
 
-const socket = io("https://najah-chat.herokuapp.com/");
-
 const Chat = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [lastPong, setLastPong] = useState(null);

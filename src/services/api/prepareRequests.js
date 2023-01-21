@@ -43,6 +43,14 @@ export const prepareCreatePrivateClassRequest = (params) => {
   };
 };
 
+export const prepareClassBookingsRequest = (params) => {
+  const { classId } = params;
+
+  return {
+    urlArgs: [classId],
+  };
+};
+
 export const prepareCreateClassBookingRequest = (params) => {
   const { classId } = params;
 
