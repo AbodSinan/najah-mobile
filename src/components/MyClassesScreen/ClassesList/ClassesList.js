@@ -22,7 +22,7 @@ const ClassesList = ({ navigation }) => {
     navigation.navigate("Class Info", {
       classId,
       isPrivate: classType == classTypeEnum.PRIVATE,
-      ownClass: true,
+      isOwnClass: true,
     });
   };
   const handleSelectClassType = (selectedClassType) => {

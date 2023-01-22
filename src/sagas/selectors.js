@@ -32,9 +32,9 @@ export const selectClass = (
   state,
   classId,
   isPrivate = false,
-  ownClass = false
+  isOwnClass = false
 ) =>
-  ownClass
+  isOwnClass
     ? isPrivate
       ? state.api.userPrivateClasses.find((cls) => cls.id === classId)
       : state.api.userClasses.find((cls) => cls.id === classId)

@@ -14,26 +14,36 @@ import {
 } from "../../sagas/selectors";
 import styles from "../../styles";
 import apiStatusEnum from "../../enums/apiStatusEnum";
+import bookingStatusEnum from "../../enums/bookingStatusEnum";
+import ClassButtons from "./ClassButtons";
 
 const ClassInfo = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const { classId, isPrivate, ownClass } = route.params;
+  const { classId, isPrivate, isOwnClass } = route.params;
   const [isModalShown, setIsModalShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const classBookings = useSelector((state) =>
     getClassBookings(state, classId)
   );
-  console.log("OWN CLASS", ownClass);
+  const confirmedClassBookings = classBookings?.filter(
+    (booking) => booking.status === bookingStatusEnum.CONFIRMED
+  );
+  const pendingClassBookings = classBookings?.filter((booking) =>
+    [
+      bookingStatusEnum.PENDING_PAYMENT,
+      bookingStatusEnum.PENDING_TUTOR,
+    ].includes(booking.status)
+  );
 
   const cls = useSelector((state) =>
-    selectClass(state, classId, isPrivate, ownClass)
+    selectClass(state, classId, isPrivate, isOwnClass)
   );
   const { createOfferStatus, createClassBookingStatus } =
     useSelector(getApiStatus);
 
   /*TODO: Create a component to confirm action that takes onConfirm and action */
   const handleConfirmPress = () => {
-    if (ownClass) {
+    if (isOwnClass) {
       if (isPrivate) {
         dispatch(api.cancelPrivateClass.createAction({ classId }));
       } else {
@@ -53,13 +63,13 @@ const ClassInfo = ({ navigation, route }) => {
     );
   };
 
-  const handleConfirmStudent = (studentId) => {
-    console.log("CONFIRM STUDENT");
+  const handleConfirmStudent = (bookingId) => {
+    dispatch(api.acceptStudent.createAction({ bookingId, isAccepted: true }));
   };
 
   useEffect(() => {
-    // Fetch booking for the classes if ownClass
-    if (ownClass) {
+    // Fetch booking for the classes if isOwnClass
+    if (isOwnClass) {
       dispatch(api.classBookings.createAction({ classId }));
     }
   }, []);
@@ -88,29 +98,6 @@ const ClassInfo = ({ navigation, route }) => {
 
   return (
     <>
-      <Portal>
-        <Dialog visible={isModalShown} onDismiss={() => setIsModalShown(false)}>
-          <Dialog.Title>Confim Class</Dialog.Title>
-          <Dialog.Content>
-            {!isLoading ? (
-              <Paragraph>
-                Are you sure you want to{" "}
-                {ownClass
-                  ? "Delete this class?"
-                  : isPrivate
-                  ? "tutor this class?"
-                  : "join this class?"}
-              </Paragraph>
-            ) : (
-              <ActivityIndicator size="large" />
-            )}
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={handleConfirmPress}>Confirm</Button>
-            <Button onPress={() => setIsModalShown(false)}>Cancel</Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
       <ScrollView style={styles.container}>
         <ListAccordion title={"Class details"} id={1}>
           <List.Item
@@ -161,23 +148,26 @@ const ClassInfo = ({ navigation, route }) => {
                 description={cls.studentCapacity}
               />
             )}
-            <List.Item
-              title={"Participating Students"}
-              description={`${cls.students?.length}`}
-            />
-            {classBookings && (
-              <ListAccordion title={"Tutor Offers"} id={3}>
-                {classBookings.map((booking) => (
+            {confirmedClassBookings?.length > 0 && (
+              <ListAccordion title={"Confirmed Students"} id={5}>
+                {confirmedClassBookings.map((booking) => (
+                  <ProfileCard profile={booking.student} />
+                ))}
+              </ListAccordion>
+            )}
+            {pendingClassBookings?.length > 0 && (
+              <ListAccordion title={"Participating Students"} id={6}>
+                {pendingClassBookings.map((booking) => (
                   <ProfileCard
                     profile={booking.student}
-                    onSelect={() => handleConfirmStudent(booking.student.id)}
+                    onSelect={() => handleConfirmStudent(booking.id)}
                   />
                 ))}
               </ListAccordion>
             )}
           </ListAccordion>
         )}
-        <ListAccordion title={"Payment details"} id={5} mode="contained">
+        <ListAccordion title={"Payment details"} id={7} mode="contained">
           <List.Item
             title={"Rate Per hour"}
             description={`${cls.ratePerHour}`}
@@ -188,13 +178,11 @@ const ClassInfo = ({ navigation, route }) => {
           />
         </ListAccordion>
       </ScrollView>
-      <Button
-        style={styles.actionbutton}
-        mode="contained"
-        onPress={() => setIsModalShown(true)}
-      >
-        {ownClass ? "Cancel class" : isPrivate ? "Request tutor" : "Join class"}
-      </Button>
+      <ClassButtons
+        classId={classId}
+        isOwnClass={isOwnClass}
+        isPrivate={isPrivate}
+      />
     </>
   );
 };

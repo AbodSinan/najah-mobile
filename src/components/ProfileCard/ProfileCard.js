@@ -19,11 +19,13 @@ const ProfileCard = ({ profile, onCardPress, onSelect }) => {
         <Headline>{profile.fullName} </Headline>
         <Paragraph>{profile.description}</Paragraph>
       </View>
-      <View style={localStyle.buttonContainer}>
-        <Button onPress={onSelect}>
-          <Icon name="check" size={30} />
-        </Button>
-      </View>
+      {onSelect && (
+        <View style={localStyle.buttonContainer}>
+          <Button onPress={onSelect}>
+            <Icon name="check" size={30} />
+          </Button>
+        </View>
+      )}
     </View>
   );
 };

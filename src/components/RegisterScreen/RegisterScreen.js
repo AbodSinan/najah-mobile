@@ -12,7 +12,7 @@ import {
 } from "react-native-paper";
 
 import api from "../../services/api/Api";
-import { getApiStatus, getRegisterErrors } from "../../sagas/selectors";
+import { getUserStatus, getRegisterErrors } from "../../sagas/selectors";
 
 import styles from "../../styles";
 
@@ -20,9 +20,8 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const { registerStatus } = useSelector(getApiStatus);
+  const { registerStatus } = useSelector(getUserStatus);
   const registerErrors = useSelector(getRegisterErrors);
   const shownError = registerErrors[0] && registerErrors[0].error;
 
@@ -88,7 +87,6 @@ const RegisterScreen = ({ navigation }) => {
           color="#f57c00"
           title="Signup"
           mode="contained"
-          disabled={isLoading}
         >
           Signup
         </Button>
@@ -96,14 +94,12 @@ const RegisterScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("Login")}
           title="Go to Login"
           mode="contained"
-          disabled={isLoading}
         >
           Go to Login
         </Button>
         {registerErrors.map((error) => (
           <HelperText type="error">{error.message}</HelperText>
         ))}
-        {isLoading && <ActivityIndicator size="large" />}
       </View>
     </LoadingContainer>
   );

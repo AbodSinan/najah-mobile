@@ -1,4 +1,5 @@
 import { REHYDRATE } from "redux-persist/lib/constants";
+import apiStatusEnum from "../enums/apiStatusEnum";
 import { rehydrateReducer } from "../utils/reducerUtils";
 
 const defaultState = Object.freeze({
@@ -13,7 +14,9 @@ const defaultState = Object.freeze({
   subjects: [],
   classBookings: {},
   newSubject: {},
-  status: {},
+  status: {
+    acceptStudent: apiStatusEnum.INITIAL,
+  },
   errors: [],
 });
 

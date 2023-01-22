@@ -103,6 +103,10 @@ class Api extends baseApi {
     method: "POST",
     prepareRequest: prepareRequestUtils.prepareSelectTutorRequest,
   });
+  acceptStudent = new Endpoint({
+    endpoint: "booking/accept-booking",
+    method: "POST",
+  });
 }
 
 export const apiMapping = {
