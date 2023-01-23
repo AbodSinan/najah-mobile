@@ -23,11 +23,23 @@ const PrivateClassesScreen = () => {
       <Stack.Screen
         name="Private Classes List"
         component={PrivateClassesList}
+        options={{
+          title: "الدروس الخصوصية",
+        }}
       />
-      <Stack.Screen name="Class Info" component={ClassInfo} />
+      <Stack.Screen
+        name="Class Info"
+        component={ClassInfo}
+        options={{
+          title: "معلومات الدرس",
+        }}
+      />
       <Stack.Screen
         name="Create Private Class"
         component={CreatePrivateClass}
+        options={{
+          title: "درس خصوصي جديد",
+        }}
       />
     </Stack.Navigator>
   );

@@ -14,14 +14,16 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 30,
     padding: 5,
+    writingDirection: "rtl",
+    textAlign: "right",
   },
   actionbutton: {
     marginBottom: 20,
   },
   iconButton: {
-    width: 50,
-    height: 50,
     margin: 20,
+    padding: 10,
+    display: "flex",
   },
   card: {
     borderRadius: 10,
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: theme.colors.border,
     marginBottom: 8,
+    textAlign: "right",
   },
   fab: {
     backgroundColor: theme.colors.primary,
@@ -45,6 +48,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: theme.colors.contrast,
+    fontFamily: "Amiri-Bold",
+  },
+  bottomPadded: {
+    paddingBottom: 8,
+  },
+  verticalDivider: {
+    width: 0,
+    height: "100%",
+    borderColor: theme.colors.contrast,
+    borderWidth: 1,
   },
 });
 

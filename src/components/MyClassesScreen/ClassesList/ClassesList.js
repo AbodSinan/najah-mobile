@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { Button, Text, Headline } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import AlignedText from "../../AlignedText";
 import ClassCard from "../../ClassCard";
 
 import {
@@ -12,6 +13,7 @@ import {
 } from "../../../sagas/selectors";
 import classTypeEnum from "../../../enums/classTypeEnum";
 import styles from "../../../styles";
+import { theme } from "../../../styles/theme";
 
 const ClassesList = ({ navigation }) => {
   const classes = useSelector(getUserClasses);
@@ -37,21 +39,43 @@ const ClassesList = ({ navigation }) => {
           onPress={() => handleSelectClassType(classTypeEnum.ACADEMY)}
           mode={classType === classTypeEnum.ACADEMY ? "contained" : "outlined"}
         >
-          Academy
+          <AlignedText
+            variant="titleLarge"
+            style={{
+              color:
+                classType === classTypeEnum.ACADEMY
+                  ? theme.colors.contrast
+                  : theme.colors.primary,
+            }}
+          >
+            محاضراتي
+          </AlignedText>
         </Button>
         <Button
           style={localStyles.topButton}
           onPress={() => handleSelectClassType(classTypeEnum.PRIVATE)}
           mode={classType === classTypeEnum.PRIVATE ? "contained" : "outlined"}
         >
-          Private
+          <AlignedText
+            variant="titleLarge"
+            style={{
+              color:
+                classType === classTypeEnum.PRIVATE
+                  ? theme.colors.contrast
+                  : theme.colors.primary,
+            }}
+          >
+            دروسي الخصوصية
+          </AlignedText>
         </Button>
       </View>
       <View style={styles.container}>
         <View>
           {classType === classTypeEnum.ACADEMY ? (
             <>
-              <Headline>Academy Classes</Headline>
+              <View style={styles.bottomPadded}>
+                <AlignedText variant="headlineMedium">محاضراتي</AlignedText>
+              </View>
               {classes.map((cls) => (
                 <ClassCard
                   key={cls.id}
@@ -62,7 +86,11 @@ const ClassesList = ({ navigation }) => {
             </>
           ) : (
             <>
-              <Headline>Private Classes</Headline>
+              <View style={styles.bottomPadded}>
+                <AlignedText variant="headlineMedium">
+                  دروسي الخصوصية
+                </AlignedText>
+              </View>
               {privateClasses.map((cls) => (
                 <ClassCard
                   key={cls.id}
@@ -76,7 +104,7 @@ const ClassesList = ({ navigation }) => {
         </View>
         <View style={localStyles.buttonRow}>
           <Button
-            mode="outlined"
+            mode="contained"
             onPress={() =>
               navigation.navigate(
                 classType == classTypeEnum.ACADEMY
@@ -87,14 +115,14 @@ const ClassesList = ({ navigation }) => {
             title="CREATE CLASS"
             style={styles.iconButton}
           >
-            <Icon name="plus" size={26} />
+            <Icon name="plus" size={30} />
           </Button>
           <Button
-            mode="outlined"
+            mode="contained"
             onPress={() => navigation.navigate("Academy")}
             style={styles.iconButton}
           >
-            <Icon name="magnify" size={26} />
+            <Icon name="magnify" size={30} />
           </Button>
         </View>
       </View>
@@ -109,7 +137,12 @@ const localStyles = StyleSheet.create({
     justifyContent: "center",
   },
   topButton: {
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "center",
     flex: 1,
+    borderRadius: 0,
+    height: 70,
   },
 });
 

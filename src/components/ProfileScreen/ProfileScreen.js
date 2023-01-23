@@ -19,8 +19,16 @@ const PrivateClassesScreen = () => {
         headerTitleStyle: styles.headerTitleStyle,
       }}
     >
-      <Stack.Screen name="User Profile" component={UserProfile} />
-      <Stack.Screen name="Edit Profile" component={EditProfile} />
+      <Stack.Screen
+        name="User Profile"
+        component={UserProfile}
+        options={{ title: "ملف المستحدم" }}
+      />
+      <Stack.Screen
+        name="Edit Profile"
+        component={EditProfile}
+        options={{ title: "تعديل المعلومات" }}
+      />
     </Stack.Navigator>
   );
 };

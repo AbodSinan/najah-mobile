@@ -1,10 +1,11 @@
-import React, { useCallack, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
-import io from "socket.io-client";
 import { GiftedChat } from "react-native-gifted-chat";
-import { Button, TextInput, Text } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import { View } from "react-native-web";
+
+import AlignedText from "../../AlignedText";
 
 const Chat = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -31,7 +32,7 @@ const Chat = () => {
         ...session,
         messages: session.messages.map((message) => ({
           _id: uuidv4(),
-          text: message.message,
+          AlignedText: message.message,
           createdAt: message.written,
           user: {
             _id: uuidv4(),
@@ -80,8 +81,8 @@ const Chat = () => {
 
   return (
     <ScrollView>
-      <Text>Connected: {"" + isConnected}</Text>
-      <Text>Last pong: {lastPong || "-"}</Text>
+      <AlignedText>Connected: {"" + isConnected}</AlignedText>
+      <AlignedText>Last pong: {lastPong || "-"}</AlignedText>
       <Button onPress={sendPing}>Send ping</Button>
       <TextInput value={message} onChange={(e) => setMessage(e.target.value)} />
       <Button onPress={sendMessage}>Send Message</Button>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as userActions from "../../../actions/user";
 import * as selectors from "../../../sagas/selectors";
 
+import AlignedText from "../../AlignedText";
 import ProfileImage from "../ProfileImage";
 import styles from "../../../styles";
 import { theme } from "../../../styles/theme";
@@ -26,10 +27,15 @@ const ProfileScreen = ({ navigation }) => {
         <Surface style={localStyles.profileContainer}>
           <List.Section>
             <List.Subheader style={localStyles.profileHeader}>
-              User info
+              <AlignedText
+                variant="titleLarge"
+                style={{ color: theme.colors.contrast }}
+              >
+                معلومات المستخدم
+              </AlignedText>
             </List.Subheader>
             <List.Item
-              title={`Full Name`}
+              title={`الأسم الكامل`}
               description={fullName}
               left={(props) => <List.Icon {...props} icon="account" />}
             />
@@ -41,38 +47,53 @@ const ProfileScreen = ({ navigation }) => {
             />
             <Divider />
             <List.Item
-              title={`Gender`}
+              title={`الجنس`}
               description={gender}
               left={(props) => <List.Icon {...props} icon="gender-female" />}
             />
             <Divider />
             <List.Subheader style={localStyles.profileHeader}>
-              Description
+              <AlignedText
+                variant="titleLarge"
+                style={{ color: theme.colors.contrast, lineHeight: 40 }}
+              >
+                السيرة الذاتية
+              </AlignedText>
             </List.Subheader>
             <List.Item
-              title={`Education Level`}
+              title={`المرحلة الدراسية`}
               description={educationLevel}
               left={(props) => <List.Icon {...props} icon="school" />}
             />
             <Divider />
-            <List.Item title={`Biography`} description={description} />
+            <List.Item title={`تفاصيل`} description={description} />
           </List.Section>
         </Surface>
       </ScrollView>
       <View style={localStyles.buttonRow}>
         <Button
-          style={styles.actionbutton}
+          style={localStyles.bottomButtons}
           mode="contained"
           onPress={handleLogout}
         >
-          Logout
+          <AlignedText
+            variant="headlineSmall"
+            style={{ color: theme.colors.contrast, lineHeight: 40 }}
+          >
+            تسجيل خروج
+          </AlignedText>
         </Button>
         <Button
-          style={styles.actionbutton}
+          style={localStyles.bottomButtons}
           mode="contained"
           onPress={() => navigation.navigate("Edit Profile")}
         >
-          Edit Profile
+          <AlignedText
+            variant="headlineSmall"
+            style={{ color: theme.colors.contrast }}
+          >
+            تعديل المعلومات
+          </AlignedText>
         </Button>
       </View>
     </View>
@@ -90,7 +111,18 @@ const localStyles = StyleSheet.create({
   buttonRow: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+  },
+  bottomButtons: {
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "center",
+    flex: 1,
+    borderRadius: 0,
+    height: 70,
+    borderLeftColor: theme.colors.contrast,
+    borderRightColor: theme.colors.contrast,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
   },
 });
 

@@ -14,12 +14,15 @@ const LoadingContainer = ({
   modalStyle,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if ([apiStatusEnum.AWAITING, apiStatusEnum.REQUESTED].includes(apiStatus)) {
       setIsLoading(true);
     } else if (apiStatus === apiStatusEnum.SUCCESS) {
       setIsLoading(false);
       onSuccess();
+    } else if (apiStatus === apiStatusEnum.ERROR) {
+      setIsLoading(false);
     }
   }, [apiStatus]);
 

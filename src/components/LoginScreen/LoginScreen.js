@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, HelperText, TextInput, Title } from "react-native-paper";
+import { Button, HelperText, TextInput, Text } from "react-native-paper";
 
 import api from "../../services/api/Api";
 import * as selectors from "../../sagas/selectors";
@@ -22,7 +22,9 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <LoadingContainer apiStatus={loginStatus} containerStyle={styles.container}>
-      <Title style={styles.title}>Welcome back!</Title>
+      <Text variant="titleLarge" style={styles.title}>
+        Welcome back!
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Enter email"

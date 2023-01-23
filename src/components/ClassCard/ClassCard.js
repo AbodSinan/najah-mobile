@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { Card, Title, Paragraph } from "react-native-paper";
+import { Card } from "react-native-paper";
 
+import AlignedText from "../AlignedText";
 import StatusChip from "../StatusChip";
 
 import { selectSubject } from "../../sagas/selectors";
@@ -15,15 +16,17 @@ const ClassCard = ({ cls, onCardPress, isPrivate = false }) => {
     <Card onPress={() => onCardPress(cls.id)} style={styles.card}>
       <Card.Title
         title={subject.name}
+        titleVariant="titleLarge"
         style={localStyles.titleContainer}
         titleStyle={localStyles.titleText}
-        right={() => <StatusChip status={cls.status} />}
+        left={() => <StatusChip status={cls.status} />}
+        leftStyle={{ width: "unset" }}
       />
       <Card.Content>
-        <Title>
-          by {isPrivate ? cls.student?.fullName : cls.tutor?.fullName}
-        </Title>
-        <Paragraph>{cls.description}</Paragraph>
+        <AlignedText variant="titleLarge">
+          من قبل:{isPrivate ? cls.student?.fullName : cls.tutor?.fullName}
+        </AlignedText>
+        <AlignedText variant="bodyMedium">{cls.description}</AlignedText>
       </Card.Content>
     </Card>
   );
@@ -37,6 +40,7 @@ const localStyles = StyleSheet.create({
   },
   titleText: {
     color: theme.colors.contrast,
+    textAlign: "right",
   },
 });
 

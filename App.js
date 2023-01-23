@@ -4,6 +4,7 @@ import { Provider as StoreProvider } from "react-redux";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { PersistGate } from "redux-persist/integration/react";
+import { Text } from "react-native-paper";
 import * as Font from "expo-font";
 import "react-native-gesture-handler";
 
@@ -22,6 +23,7 @@ export function App() {
     (async () => {
       await Font.loadAsync({
         Amiri: require("./assets/Amiri-Regular.ttf"),
+        "Amiri-Bold": require("./assets/Amiri-Bold.ttf"),
       });
     })();
   }, []);

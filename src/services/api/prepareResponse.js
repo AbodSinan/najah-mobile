@@ -63,15 +63,15 @@ export const prepareUserClassesResponse = ({ data, state }) => ({
 
 export const prepareCreateClassResponse = ({ data, state }) => ({
   response: {
-    userClasses: [...state.userClasses, ...data.response],
-    classes: [...state.classes, ...data.response],
+    userClasses: [...state.userClasses, data.response],
+    classes: [...state.classes, data.response],
   },
 });
 
 export const prepareCreatePrivateClassResponse = ({ data, state }) => ({
   response: {
-    userPrivateClasses: [...state.userPrivateClasses, ...data.response],
-    privateClasses: [...state.privateClasses, ...data.response],
+    userPrivateClasses: [...state.userPrivateClasses, data.response],
+    privateClasses: [...state.privateClasses, data.response],
   },
 });
 

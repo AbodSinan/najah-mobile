@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Card, FAB, Paragraph, Title } from "react-native-paper";
+import { Card, FAB } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import {
   getEducationLevels,
@@ -11,7 +11,10 @@ import {
 } from "../../../sagas/selectors";
 import { extractLabelList, filterSubjects } from "../../../utils/commonUtils";
 
+import AlignedText from "../../AlignedText";
+
 import styles from "../../../styles";
+import { theme } from "../../../styles/theme";
 
 const SearchSubject = ({ navigation }) => {
   const educationLevels = useSelector(getEducationLevels);
@@ -47,6 +50,7 @@ const SearchSubject = ({ navigation }) => {
       <FAB
         style={styles.fab}
         label="Create Class"
+        color={theme.colors.contrast}
         onPress={handleCreateClassPress}
       />
       <ScrollView style={styles.container}>
@@ -76,21 +80,30 @@ const SearchSubject = ({ navigation }) => {
             list={extractLabelList(subjectCategories)}
           />
         </View>
-        {filterSubjects.length > 0 ? (
-          <Title>المواد المتوفرة</Title>
-        ) : (
-          <Title>لا توجد مواد حاليا</Title>
-        )}
-
+        <View style={styles.bottomPadded}>
+          {filterSubjects.length > 0 ? (
+            <AlignedText variant="headlineMedium">المواد المتوفرة</AlignedText>
+          ) : (
+            <AlignedText variant="headlineMedium">
+              لا توجد مواد حاليا
+            </AlignedText>
+          )}
+        </View>
         {filteredSubjects.map((subject) => (
           <Card
             key={subject.id}
             onPress={() => handleSubjectPress(subject)}
             style={styles.card}
           >
-            <Card.Title title={subject.name} />
+            <Card.Title
+              titleStyle={{ textAlign: "right" }}
+              title={subject.name}
+              titleVariant="titleLarge"
+            />
             <Card.Content>
-              <Paragraph>{subject.description}</Paragraph>
+              <AlignedText variant="bodyLarge">
+                {subject.description}
+              </AlignedText>
             </Card.Content>
           </Card>
         ))}

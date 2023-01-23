@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View } from "react-native";
-import LoadingContainer from "../LoadingContainer";
+import { TextInput, Button, HelperText } from "react-native-paper";
 
-import {
-  ActivityIndicator,
-  TextInput,
-  Button,
-  Title,
-  HelperText,
-} from "react-native-paper";
+import AlignedText from "../AlignedText";
+import LoadingContainer from "../LoadingContainer";
 
 import api from "../../services/api/Api";
 import { getUserStatus, getRegisterErrors } from "../../sagas/selectors";
@@ -44,7 +39,9 @@ const RegisterScreen = ({ navigation }) => {
       onSuccess={() => navigation.navigate("Create Profile")}
     >
       <View style={styles.container}>
-        <Title style={styles.title}>Create new account</Title>
+        <AlignedText variant="headlineMedium" style={styles.title}>
+          صنع حساب
+        </AlignedText>
         <TextInput
           style={styles.input}
           placeholder="Enter email"
