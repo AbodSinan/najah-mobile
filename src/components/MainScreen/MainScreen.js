@@ -14,9 +14,8 @@ import PrivateClassesScreen from "../PrivateClassesScreen";
 import { getUserToken } from "../../sagas/selectors";
 import EditProfile from "../EditProfile/EditProfile";
 
-import * as settings from "../../settings";
-
 import styles from "../../styles";
+import { theme } from "../../styles/theme";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -33,6 +32,8 @@ const MainScreen = ({ navigator }) => {
             headerStyle: {
               backgroundColor: "red",
             },
+            headerTitleAlign: "center",
+            headerTitleStyle: styles.headerTitleStyle,
           }}
         >
           <Tab.Screen
@@ -73,7 +74,15 @@ const MainScreen = ({ navigator }) => {
           />
         </Tab.Navigator>
       ) : (
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.colors.primary,
+            },
+            headerTitleAlign: "center",
+            headerTitleStyle: styles.headerTitleStyle,
+          }}
+        >
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Create Profile" component={EditProfile} />

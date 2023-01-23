@@ -4,6 +4,7 @@ import ClassesList from "./ClassesList";
 import CreateClass from "../CreateClass";
 import ClassInfo from "../ClassInfo";
 
+import styles from "../../styles";
 import { theme } from "../../styles/theme";
 
 const Stack = createStackNavigator();
@@ -15,6 +16,8 @@ const MyClassesScreen = ({ navigator }) => {
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
+        headerTitleAlign: "center",
+        headerTitleStyle: styles.headerTitleStyle,
       }}
     >
       <Stack.Screen name="Classes List" component={ClassesList} />

@@ -82,18 +82,13 @@ const RegisterScreen = ({ navigation }) => {
         {shownError?.password2?.map((passwordError) => (
           <HelperText type="error">{passwordError}</HelperText>
         ))}
-        <Button
-          onPress={onHandleRegister}
-          color="#f57c00"
-          title="Signup"
-          mode="contained"
-        >
+        <Button onPress={onHandleRegister} title="Signup" mode="contained">
           Signup
         </Button>
         <Button
           onPress={() => navigation.navigate("Login")}
           title="Go to Login"
-          mode="contained"
+          mode="text"
         >
           Go to Login
         </Button>

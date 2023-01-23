@@ -18,12 +18,38 @@ const ClassesScreen = ({ navigator }) => {
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
+        headerTitleAlign: "center",
+        headerTitleStyle: styles.headerTitleStyle,
       }}
     >
-      <Stack.Screen name="Search Subject" component={SearchSubject} />
-      <Stack.Screen name="Subject Classes" component={SubjectClasses} />
-      <Stack.Screen name="Create Class" component={CreateClass} />
-      <Stack.Screen name="Class Info" component={ClassInfo} />
+      <Stack.Screen
+        name="Search Subject"
+        component={SearchSubject}
+        options={{
+          title: "بحث عن موضوع",
+        }}
+      />
+      <Stack.Screen
+        name="Subject Classes"
+        component={SubjectClasses}
+        options={{
+          title: "دروس الموضوع",
+        }}
+      />
+      <Stack.Screen
+        name="Create Class"
+        component={CreateClass}
+        options={{
+          title: "درس جديد",
+        }}
+      />
+      <Stack.Screen
+        name="Class Info"
+        component={ClassInfo}
+        options={{
+          title: "معلومات الدروس",
+        }}
+      />
     </Stack.Navigator>
   );
 };

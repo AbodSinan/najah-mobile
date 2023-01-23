@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View } from "react-native";
 import { Button, HelperText, TextInput, Title } from "react-native-paper";
 
 import api from "../../services/api/Api";
 import * as selectors from "../../sagas/selectors";
 import styles from "../../styles";
+import LoadingContainer from "../LoadingContainer";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -16,11 +16,12 @@ const LoginScreen = ({ navigation }) => {
     dispatch(api.login.createAction({ email, password }));
   };
 
+  const { loginStatus } = useSelector(selectors.getUserStatus);
   const loginErrors = useSelector(selectors.getLoginErrors);
   const shownError = loginErrors[0] && loginErrors[0].error;
 
   return (
-    <View style={styles.container}>
+    <LoadingContainer apiStatus={loginStatus} containerStyle={styles.container}>
       <Title style={styles.title}>Welcome back!</Title>
       <TextInput
         style={styles.input}
@@ -59,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
       <Button mode="text" onPress={() => navigation.navigate("Register")}>
         Register
       </Button>
-    </View>
+    </LoadingContainer>
   );
 };
 export default LoginScreen;

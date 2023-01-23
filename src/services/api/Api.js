@@ -107,6 +107,10 @@ class Api extends baseApi {
     endpoint: "booking/accept-booking",
     method: "POST",
   });
+  updateClassStatus = new Endpoint({
+    endpoint: "booking/update-class-status",
+    method: "POST",
+  });
 }
 
 export const apiMapping = {

@@ -4,6 +4,7 @@ import ClassInfo from "../ClassInfo";
 import CreatePrivateClass from "./CreatePrivateClass";
 import PrivateClassesList from "./PrivateClassesList";
 
+import styles from "../../styles";
 import { theme } from "../../styles/theme";
 
 const Stack = createStackNavigator();
@@ -15,6 +16,8 @@ const PrivateClassesScreen = () => {
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
+        headerTitleAlign: "center",
+        headerTitleStyle: styles.headerTitleStyle,
       }}
     >
       <Stack.Screen

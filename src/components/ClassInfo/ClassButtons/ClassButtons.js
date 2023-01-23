@@ -8,7 +8,10 @@ import {
   Portal,
   Paragraph,
 } from "react-native-paper";
-import LoadingContainer from "../../LoadingContainer";
+
+import api from "../../../services/api/Api";
+
+import classStatusEnum from "../../../enums/classStatusEnum";
 
 const ClassButtons = ({ classId, isOwnClass, isPrivate }) => {
   const dispatch = useDispatch();
@@ -19,13 +22,23 @@ const ClassButtons = ({ classId, isOwnClass, isPrivate }) => {
       case "Join class":
         dispatch(api.createClassBooking.createAction({ classId }));
         break;
-      case "Delete private class":
-        dispatch(api.cancelPrivateClass.createAction({ classId }));
-        break;
       case "Delete class":
-        dispatch(api.cancelClass.createAction({ classId }));
+        dispatch(
+          api.updateClassStatus.createAction({
+            classId,
+            classType: isPrivate ? "private" : "academy",
+            status: classStatusEnum.CANCELLED,
+          })
+        );
         break;
       case "Start class":
+        dispatch(
+          api.updateClassStatus.createAction({
+            classId,
+            classType: isPrivate ? "private" : "academy",
+            status: classStatusEnum.STARTED,
+          })
+        );
         break;
       case "Offer tutorship":
         dispatch(api.createTutorOffer.createAction({ privateClass: classId }));
@@ -33,15 +46,6 @@ const ClassButtons = ({ classId, isOwnClass, isPrivate }) => {
       default:
         break;
     }
-    if (isOwnClass) {
-      if (isPrivate) {
-      } else {
-      }
-    }
-    if (isPrivate) {
-    } else {
-    }
-
     setAction(null);
   };
 
@@ -53,9 +57,7 @@ const ClassButtons = ({ classId, isOwnClass, isPrivate }) => {
   );
 
   const ownPrivateClassButtons = () => (
-    <Button onPress={() => setAction("Delete private class")}>
-      Delete class
-    </Button>
+    <Button onPress={() => setAction("Delete class")}>Delete class</Button>
   );
 
   const privateTutorOfferButton = () => (

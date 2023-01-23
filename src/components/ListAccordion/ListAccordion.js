@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { List } from "react-native-paper";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { theme } from "../../styles/theme";
 
-const ListAccordion = ({ children, ...otherProps }) => {
+const ListAccordion = ({ children, icon, ...otherProps }) => {
   const [expanded, setExpanded] = useState(true);
 
   return (
@@ -13,6 +14,12 @@ const ListAccordion = ({ children, ...otherProps }) => {
       onPress={() => setExpanded(!expanded)}
       style={styles.accordionButton}
       titleStyle={styles.description}
+      left={(props) => (
+        <List.Icon
+          {...props}
+          icon={() => <Icon name={icon} color="white" size={26} solid />}
+        />
+      )}
       {...otherProps}
     >
       {children}

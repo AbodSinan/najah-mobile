@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ScrollView } from "react-native";
-import { Button, List, Portal, Dialog, Paragraph } from "react-native-paper";
+import { List } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 
 import ListAccordion from "../ListAccordion";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 import api from "../../services/api/Api";
 import {
@@ -20,8 +21,6 @@ import ClassButtons from "./ClassButtons";
 const ClassInfo = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { classId, isPrivate, isOwnClass } = route.params;
-  const [isModalShown, setIsModalShown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const classBookings = useSelector((state) =>
     getClassBookings(state, classId)
   );
@@ -40,22 +39,6 @@ const ClassInfo = ({ navigation, route }) => {
   );
   const { createOfferStatus, createClassBookingStatus } =
     useSelector(getApiStatus);
-
-  /*TODO: Create a component to confirm action that takes onConfirm and action */
-  const handleConfirmPress = () => {
-    if (isOwnClass) {
-      if (isPrivate) {
-        dispatch(api.cancelPrivateClass.createAction({ classId }));
-      } else {
-        dispatch(api.cancelClass.createAction({ classId }));
-      }
-    }
-    if (isPrivate) {
-      dispatch(api.createTutorOffer.createAction({ privateClass: classId }));
-    } else {
-      dispatch(api.createClassBooking.createAction({ classId }));
-    }
-  };
 
   const handleSelectTutor = (tutorId) => {
     dispatch(
@@ -80,26 +63,10 @@ const ClassInfo = ({ navigation, route }) => {
     }
   }, [createOfferStatus]);
 
-  useEffect(() => {
-    if (
-      createClassBookingStatus &&
-      createClassBookingStatus === apiStatusEnum.AWAITING
-    ) {
-      setIsLoading(true);
-    }
-    if (
-      createClassBookingStatus &&
-      createClassBookingStatus === apiStatusEnum.SUCCESS
-    ) {
-      setIsLoading(false);
-      setIsModalShown(false);
-    }
-  }, [createClassBookingStatus]);
-
   return (
     <>
       <ScrollView style={styles.container}>
-        <ListAccordion title={"Class details"} id={1}>
+        <ListAccordion icon="book" title={"Class details"} id={1}>
           <List.Item
             title={"Duration of a class"}
             description={`${cls.duration} hours`}
@@ -115,7 +82,11 @@ const ClassInfo = ({ navigation, route }) => {
           <List.Item title={"Description"} description={cls.description} />
         </ListAccordion>
         {cls.tutor && (
-          <ListAccordion title={"Tutor details"} id={2}>
+          <ListAccordion
+            icon="chalkboard-teacher"
+            title={"Tutor details"}
+            id={2}
+          >
             <List.Item
               title={"Tutor name"}
               description={`${cls.tutor.fullName}`}
@@ -141,22 +112,24 @@ const ClassInfo = ({ navigation, route }) => {
           </ListAccordion>
         )}
         {!isPrivate && (
-          <ListAccordion title={"Participant details"} id={4} mode="contained">
-            {cls.studentCapacity && (
-              <List.Item
-                title={"Class capacity"}
-                description={cls.studentCapacity}
-              />
-            )}
+          <>
             {confirmedClassBookings?.length > 0 && (
-              <ListAccordion title={"Confirmed Students"} id={5}>
+              <ListAccordion
+                icon="user-graduate"
+                title={"Confirmed Students"}
+                id={5}
+              >
                 {confirmedClassBookings.map((booking) => (
                   <ProfileCard profile={booking.student} />
                 ))}
               </ListAccordion>
             )}
             {pendingClassBookings?.length > 0 && (
-              <ListAccordion title={"Participating Students"} id={6}>
+              <ListAccordion
+                icon="users"
+                title={"Participating Students"}
+                id={6}
+              >
                 {pendingClassBookings.map((booking) => (
                   <ProfileCard
                     profile={booking.student}
@@ -165,9 +138,14 @@ const ClassInfo = ({ navigation, route }) => {
                 ))}
               </ListAccordion>
             )}
-          </ListAccordion>
+          </>
         )}
-        <ListAccordion title={"Payment details"} id={7} mode="contained">
+        <ListAccordion
+          title={"Payment details"}
+          id={7}
+          mode="contained"
+          icon="money-bill-wave"
+        >
           <List.Item
             title={"Rate Per hour"}
             description={`${cls.ratePerHour}`}

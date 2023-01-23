@@ -41,6 +41,11 @@ const styles = StyleSheet.create({
   dropDown: {
     marginBottom: 8,
   },
+  headerTitleStyle: {
+    fontWeight: "bold",
+    fontSize: 20,
+    color: theme.colors.contrast,
+  },
 });
 
 export default styles;

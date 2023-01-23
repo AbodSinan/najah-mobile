@@ -4,6 +4,7 @@ import { Provider as StoreProvider } from "react-redux";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { PersistGate } from "redux-persist/integration/react";
+import * as Font from "expo-font";
 import "react-native-gesture-handler";
 
 import configureStore from "./src/store";
@@ -16,6 +17,14 @@ const PERSISTENCE_KEY = "NAVIGATION_STATE";
 
 export function App() {
   const [initialState, setInitialState] = useState();
+
+  useEffect(() => {
+    (async () => {
+      await Font.loadAsync({
+        Amiri: require("./assets/Amiri-Regular.ttf"),
+      });
+    })();
+  }, []);
 
   return (
     <StoreProvider store={store}>
