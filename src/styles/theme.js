@@ -8,6 +8,7 @@ import {
   MD3DarkTheme,
   MD3LightTheme,
 } from "react-native-paper";
+import * as Font from "expo-font";
 import merge from "deepmerge";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -18,8 +19,15 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 const combinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const combinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
+(async () => {
+  await Font.loadAsync({
+    Amiri: require("../../assets/Amiri-Regular.ttf"),
+    "Amiri-Bold": require("../../assets/Amiri-Bold.ttf"),
+  });
+})();
+
 const fontConfig = {
-  fontFamily: "Amiri, Amiri-Bold",
+  fontFamily: "Amiri",
   textAlign: "right",
   writingDirection: "rtl",
 };

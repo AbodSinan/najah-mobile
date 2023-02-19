@@ -89,3 +89,11 @@ export const prepareSelectTutorRequest = (params) => ({
     ...params,
   },
 });
+
+export const prepareGetProfileRequest = (params) => {
+  const { profileId } = params;
+
+  return {
+    urlArgs: [profileId],
+  };
+};

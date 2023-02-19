@@ -50,6 +50,11 @@ const ClassInfo = ({ navigation, route }) => {
     dispatch(api.acceptStudent.createAction({ bookingId, isAccepted: true }));
   };
 
+  const handleProfilePress = (profileId) => {
+    console.log("PRESSED");
+    navigation.navigate("User Profile", { profileId });
+  };
+
   useEffect(() => {
     // Fetch booking for the classes if isOwnClass
     if (isOwnClass) {
@@ -120,7 +125,10 @@ const ClassInfo = ({ navigation, route }) => {
                 id={5}
               >
                 {confirmedClassBookings.map((booking) => (
-                  <ProfileCard profile={booking.student} />
+                  <ProfileCard
+                    profile={booking.student}
+                    onCardPress={handleProfilePress}
+                  />
                 ))}
               </ListAccordion>
             )}

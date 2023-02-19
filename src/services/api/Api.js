@@ -3,6 +3,7 @@ import Endpoint from "./Endpoint";
 
 import * as prepareRequestUtils from "./prepareRequests";
 import * as prepareResponseUtils from "./prepareResponse";
+import * as settings from "../../settings";
 
 class Api extends baseApi {
   constructor(...args) {
@@ -111,11 +112,16 @@ class Api extends baseApi {
     endpoint: "booking/update-class-status",
     method: "POST",
   });
+  getProfile = new Endpoint({
+    endpoint: "profile/get-profile/%s",
+    prepareRequest: prepareRequestUtils.prepareGetProfileRequest,
+    prepareResponse: prepareResponseUtils.prepareGetProfileResponse,
+  });
 }
 
 export const apiMapping = {
   api: new Api({
-    baseUrl: "http://ec2-13-228-213-53.ap-southeast-1.compute.amazonaws.com/",
+    baseUrl: settings.BASE_URL,
   }),
 };
 

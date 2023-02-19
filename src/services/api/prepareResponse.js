@@ -91,3 +91,11 @@ export const prepareClassBookingsResponse = ({ data, state }) => {
     },
   };
 };
+
+export const prepareGetProfileResponse = ({ data, state }) => ({
+  response: {
+    retrievedProfile: {
+      ...data.response,
+    },
+  },
+});

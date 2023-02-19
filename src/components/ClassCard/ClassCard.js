@@ -15,12 +15,12 @@ const ClassCard = ({ cls, onCardPress, isPrivate = false }) => {
   return (
     <Card onPress={() => onCardPress(cls.id)} style={styles.card}>
       <Card.Title
-        title={subject.name}
+        title={subject?.name}
         titleVariant="titleLarge"
         style={localStyles.titleContainer}
         titleStyle={localStyles.titleText}
         left={() => <StatusChip status={cls.status} />}
-        leftStyle={{ width: "unset" }}
+        leftStyle={{ width: "auto" }}
       />
       <Card.Content>
         <AlignedText variant="titleLarge">

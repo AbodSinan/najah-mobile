@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 import { List, Button, Surface, Divider } from "react-native-paper";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as userActions from "../../../actions/user";
 import * as selectors from "../../../sagas/selectors";
+import Api from "../../../services/api/Api";
 
 import AlignedText from "../../AlignedText";
 import ProfileImage from "../ProfileImage";
 import styles from "../../../styles";
 import { theme } from "../../../styles/theme";
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { fullName, image, description, gender, educationLevel, email } =
-    useSelector(selectors.getUserInfo);
+    useSelector((state) => selectors.getUserInfo(state, profileId));
+
+  const { profileId } = route?.params || {};
 
   const handleLogout = () => {
     dispatch(userActions.logout());
   };
+
+  useEffect(() => {
+    if (!fullName) {
+      navigation.navigate("Edit Profile");
+    }
+  }, [fullName]);
+
+  useEffect(() => {
+    if (profileId) {
+      dispatch(Api.getProfile.createAction({ profileId }));
+    }
+  }, [profileId]);
 
   return (
     <View style={styles.container}>

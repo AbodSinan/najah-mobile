@@ -81,7 +81,7 @@ const SearchSubject = ({ navigation }) => {
           />
         </View>
         <View style={styles.bottomPadded}>
-          {filterSubjects.length > 0 ? (
+          {filteredSubjects.length > 0 ? (
             <AlignedText variant="headlineMedium">المواد المتوفرة</AlignedText>
           ) : (
             <AlignedText variant="headlineMedium">

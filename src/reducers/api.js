@@ -14,8 +14,10 @@ const defaultState = Object.freeze({
   subjects: [],
   classBookings: {},
   newSubject: {},
+  retrievedProfile: {},
   status: {
     acceptStudent: apiStatusEnum.INITIAL,
+    retrievedProfile: apiStatusEnum.INITIAL,
   },
   errors: [],
 });

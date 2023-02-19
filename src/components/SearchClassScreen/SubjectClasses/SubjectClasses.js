@@ -1,6 +1,5 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import { Card, Title, Paragraph } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { selectSubjectClasses } from "../../../sagas/selectors";
 import styles from "../../../styles";

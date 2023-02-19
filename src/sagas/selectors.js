@@ -2,7 +2,8 @@ import { chain } from "lodash";
 
 export const getUserType = (state) => state.user.userType;
 export const getUserToken = (state) => state.user.token;
-export const getUserInfo = (state) => state.user;
+export const getUserInfo = (state, profileId) =>
+  profileId ? state.api.retrievedProfile : state.user;
 
 /* TODO: Can probably create a module to make this more efficient */
 export const getLoginErrors = (state) =>
