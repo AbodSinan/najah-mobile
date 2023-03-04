@@ -33,7 +33,7 @@ const LoadingContainer = ({
           <ActivityIndicator size="large" />
         </Modal>
       </Portal>
-      <View styles={containerStyle}>{children}</View>
+      <View style={containerStyle}>{children}</View>
     </View>
   );
 };

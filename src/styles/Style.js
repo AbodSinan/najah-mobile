@@ -3,7 +3,6 @@ import { theme } from "./theme";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: 30,
     paddingHorizontal: 12,
   },
